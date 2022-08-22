@@ -28,7 +28,7 @@ const data = [
           {
             id: 4,
             url: "./img/Vector.svg",
-            name: "Tài liệu mất",
+            name: "Tài liệu mật",
             chinden: [
               {
                 id: 5,
@@ -66,24 +66,28 @@ const data = [
           {
             id: 10,
             url: "./img/JPG.svg",
+            img:"./img/crush.svg",
             name: "Ảnh crush mặc đẹp.jpg",
             chinden: null,
           },
           {
             id: 11,
             url: "./img/JPG.svg",
+            img:"./img/crush3.svg",
             name: "Ảnh crush.jpg",
             chinden: null,
           },
           {
             id: 12,
             url: "./img/JPG.svg",
+            img:"./img/crush2.svg",
             name: "Được ôm crush.jpg",
             chinden: null,
           },
           {
             id: 13,
             url: "./img/JPG.svg",
+            img:"./img/crush1.svg",
             name: "Ảnh crush cười.jpg",
             chinden: null,
           },
@@ -149,8 +153,8 @@ const renderdata = () => {
             <p class="logo-login">${email().slice(0, 1).toLocaleUpperCase()}</p>
           </div>
           <div class="col-10">
-            <p class="name-user">${email().slice(0, email().indexOf("@"))}</p>
-            <p class="email-user">${email()}</p>
+            <p class="name-user">${email().slice(0, email().indexOf("@")).length>20?email().slice(0, email().indexOf("@")).slice(0,20)+'...':email().slice(0, email().indexOf("@"))}</p>
+            <p class="email-user">${email().length>23?email().slice(0,23)+'...':email()}</p>
           </div>
         </div>
         <div class="nav-list-items">
@@ -187,7 +191,7 @@ const renderdata = () => {
               <img class="color-icon" src="./img/Trash.svg" alt="" />
             </div>
             <div class="col-10">
-              <p class="name-user">Xóa</p>
+              <p class="name-user">Thùng rác</p>
             </div>
           </div>
         </div>
@@ -271,13 +275,13 @@ const header = () => {
             </button>
             <button class="addfile">
               <img
-                class="color-icon"
+                class="color-icon lager"
                 src="./img/FolderNotchPlus.svg"
                 alt=""
               />
             </button>
             <button class="addfile">
-              <img class="color-icon" src="./img/Table.svg" alt="" />
+              <img class="color-icon lager" src="./img/Table.svg" alt="" />
             </button>
           </div>
         </div>

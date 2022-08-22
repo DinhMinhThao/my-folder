@@ -104,11 +104,11 @@
 }
 .header {
     background-color: var(--secondary-color);
-    padding: 6px 16px;
+    padding: 8px 16px;
 
 }
 .lager {
-    width: 28px;
+    width: 24px;
 }
 
 .item-right button {
