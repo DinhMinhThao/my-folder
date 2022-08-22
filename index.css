@@ -1,0 +1,219 @@
+@import url(./base.css);
+
+.form {
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #0e2866;
+}
+.form-text{
+    color: white;
+    margin-bottom: 40px;
+}
+.input-res{
+    width: 350px;
+    padding: 12px;
+    outline: none;
+    border-radius: 4px;
+}
+
+.btn {
+    padding: 10px;
+    border-radius: 4px;
+    background-color: var(--secondary-color);
+    color: var(--secondary-text);
+    right: 2px;
+    top: 2px;
+}
+.btn:hover {
+    transform: scale(1.025);
+    cursor: pointer;
+}
+.infor {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--secondary-text);
+}
+
+.nav-left {
+    width: 240px;
+    background-color: var(--primary-color);
+    height: 100vh;
+    padding: 0 16px;
+}
+.logo-login {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    padding: 5px;
+    border: 1px solid var(--secondary-text);
+    border-radius: 50%;
+
+}
+.logo-name{
+    text-align: center;
+    padding: 2px;
+}
+.name-user,
+.email-user{
+    font-size: .8rem;
+    color: var(--secondary-text);
+    padding-left: 8px;
+
+}
+
+.color-icon {
+    filter: invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%);
+}
+
+.nav-list {
+    padding: 10px 18px ;
+    border-left: 2px solid transparent;
+    margin: 0 -16px;
+}
+.nav-list:hover {
+    background-color: var(--hover-item-color);
+    border-left: 2px solid var(--forcus-action-color);
+    cursor: pointer;
+}
+.nav-list-focus {
+    border-left: 2px solid var(--forcus-action-color);
+
+}
+
+.nav-list-focus img,
+.nav-list-focus p {
+    color: var(--forcus-action-color);
+    filter: invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+      brightness(87%) contrast(101%);
+}
+.nav-list:hover img,
+.nav-list:hover p {
+    color: var(--forcus-action-color);
+    filter: invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+      brightness(87%) contrast(101%);
+}
+.nav-list-items {
+    border-bottom: 1px solid var(--secondary-text);
+}
+
+/* Hear */
+.head-table {
+    width: calc(100% - 240px);
+}
+.header {
+    background-color: var(--secondary-color);
+    padding: 6px 16px;
+
+}
+.lager {
+    width: 28px;
+}
+
+.item-right button {
+    background-color: transparent;
+    padding: 4px 8px;
+    margin-left: 20px;
+    border-radius: 8px;
+}
+
+.text-main-text,
+.upload-text {
+    color: var(--secondary-text);
+    padding-left: 4px;
+}
+label.upload {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.item-right button:hover {
+    background-color: var(--forcus-action-color);
+    transform: scale(0.8);
+    cursor: pointer;
+    transition: all .3s linear;
+}
+label:hover {
+    background-color: var(--forcus-action-color);
+    transform: scale(0.8);
+    cursor: pointer;
+    transition: all .3s linear;
+}
+.center-header {
+    width: 100%;
+    left: 0;
+}
+.input-header{
+    width: 100%;
+    padding: 10px;
+    margin: 0 16px;
+    outline: none;
+    border-radius: 8px;
+}
+.btn-header-input {
+    right: 19px;
+    padding: 7px;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    color: var(--secondary-text);
+    cursor: pointer;
+}
+.btn-header-input:hover {
+    transform: scale(1.025);
+}
+
+/* Tree */
+
+.tree-table-left {
+    width: 200px;
+    height: calc(100vh - 55.5px);
+}
+
+.tree-table-right {
+    width: calc(100% - 200px);
+    background-color: #FAFAFA;
+}
+.name-tre{
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: .8rem;
+}
+.name-tre p{
+    font-size: .8rem;
+    cursor: pointer;
+}
+.name-tre p:hover{
+    font-weight: 600;
+    transition: all .3s linear;
+}
+
+.folder-item {
+    padding: 10px;
+}
+
+.items img{
+    filter: invert(80%) sepia(32%) saturate(384%) hue-rotate(360deg)
+    brightness(104%) contrast(105%);
+  margin-right: 4px;
+}
+
+.items p {
+    font-size: .7rem;
+}
+
+.folder-item:hover {
+    background-color: var(--hover-item-color);
+    cursor: pointer;
+}
+.folder-item:hover .items p{
+    color: var(--secondary-text);
+}
+.folder-item:hover .icon-tree img{
+    filter: invert(80%) sepia(32%) saturate(384%) hue-rotate(360deg)
+    brightness(104%) contrast(105%);
+}
+
+.table-right-item {
+    text-align: center;
+}

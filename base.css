@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+/* Các biến màu và tổng quan */
+
+:root {
+  --primary-color: #000b11;
+  --secondary-color: #1c7d4e;
+  --secondary-text: #f1f3ce;
+  --border-color: #e2e2e2;
+  --detail-color: #202122;
+  --detail-color-gb: #rgba(0, 17, 16, 0.7);
+  --hover-item-color: #02283d;
+  --forcus-action-color: #1f78d4;
+  --backgroud-color: #fafafa;
+}
+
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.3 linear;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+/* Chia cột */
+
+.col-1 {
+  width: 8.333333%;
+}
+.col-2 {
+  width: 16.666667%;
+}
+.col-3 {
+  width: 25%;
+}
+
+.col-4 {
+  width: 33.333333%;
+}
+
+.col-5 {
+  width: 41.666667%;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.col-7 {
+  width: 58.333333%;
+}
+
+.col-8 {
+  width: 66.666667%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+.col-10 {
+  width: 83.333333%;
+}
+
+.col-11 {
+  width: 91.666667%;
+}
+.col-12 {
+  width: 100%;
+}
+
+/* chỉnh theo hàng */
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Chỉnh theo cột */
+
+.d-flex {
+  display: flex;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* justify */
+.j-end {
+  justify-content: flex-end;
+}
+.j-center {
+  justify-content: center;
+}
+.j-start {
+  justify-content: flex-start;
+}
+.j-around {
+  justify-content: space-around;
+}
+.j-between {
+  justify-content: space-between;
+}
+/* align-items */
+
+.a-center {
+  align-items: center;
+}
+.a-start {
+  align-items: flex-start;
+}
+.a-end {
+  align-items: flex-end;
+}
+
+/* Position */
+
+.p-absolute {
+  position: absolute;
+}
+
+.p-relative {
+  position: relative;
+}
+
+.d-none {
+  display: none;
+}
+.d-block {
+  display: block;
+}
+
+.text-1420600 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.text-1420400 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.text-1624600 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+a {
+  text-decoration: none;
+}
