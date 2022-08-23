@@ -1,3 +1,5 @@
+
+
 const simpleStatuts = (initial) => {
   let val = initial;
   return [
@@ -12,39 +14,39 @@ const data = [
   {
     id: 1,
     url: "./img/Vector.svg",
-    img:"",
+    img: "",
     name: "Doccument",
     chinden: [
       {
         id: 2,
         url: "./img/Vector.svg",
-        img:"",
+        img: "",
         name: "Setup",
         chinden: [],
       },
       {
         id: 3,
         url: "./img/Vector.svg",
-        img:"",
+        img: "",
         name: "Tài liệu",
         chinden: [
           {
             id: 4,
             url: "./img/Vector.svg",
-            img:"",
+            img: "",
             name: "Tài liệu mật",
             chinden: [
               {
                 id: 5,
                 url: "./img/DOC.svg",
-                img:"",
+                img: "",
                 name: "Hướng đẫn tán gái để lấy làm vợ.doc",
                 chinden: null,
               },
               {
                 id: 6,
                 url: "./img/DOC.svg",
-                img:"",
+                img: "",
                 name: "Hướng đẫn xấu trai vẫn lấy được vợ.doc",
                 chinden: null,
               },
@@ -53,14 +55,14 @@ const data = [
           {
             id: 7,
             url: "./img/DOC.svg",
-            img:"",
+            img: "",
             name: "Bài tập của tôi.doc",
             chinden: null,
           },
           {
             id: 8,
             url: "./img/DOC.svg",
-            img:"",
+            img: "",
             name: "Hướng dẫn làm đề án.doc",
             chinden: null,
           },
@@ -69,34 +71,34 @@ const data = [
       {
         id: 9,
         url: "./img/Vector.svg",
-        img:"",
+        img: "",
         name: "Ảnh của tôi",
         chinden: [
           {
             id: 10,
             url: "./img/JPG.svg",
-            img:"./img/crush.svg",
+            img: "./img/crush.svg",
             name: "Ảnh crush mặc đẹp.jpg",
             chinden: null,
           },
           {
             id: 11,
             url: "./img/JPG.svg",
-            img:"./img/crush3.svg",
+            img: "./img/crush3.svg",
             name: "Ảnh crush.jpg",
             chinden: null,
           },
           {
             id: 12,
             url: "./img/JPG.svg",
-            img:"./img/crush2.svg",
+            img: "./img/crush2.svg",
             name: "Được ôm crush.jpg",
             chinden: null,
           },
           {
             id: 13,
             url: "./img/JPG.svg",
-            img:"./img/crush1.svg",
+            img: "./img/crush1.svg",
             name: "Ảnh crush cười.jpg",
             chinden: null,
           },
@@ -107,31 +109,30 @@ const data = [
   {
     id: 14,
     url: "./img/Vector.svg",
-    img:"",
+    img: "",
     name: "Doccument 1",
     chinden: [],
   },
   {
     id: 15,
     url: "./img/Vector.svg",
-    img:"",
+    img: "",
     name: "Doccument 2",
     chinden: [],
   },
   {
     id: 16,
     url: "./img/Vector.svg",
-    img:"",
+    img: "",
     name: "Doccument 3",
     chinden: [],
   },
 ];
 
-
-const dsaf = data.flatMap(a=>[a,...a.chinden])
-const flatDara = dsaf.flatMap((a)=>[a,...a.chinden])
-const flatData = [...flatDara,...flatDara[6].chinden]
-const EMAIL = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
+const dsaf = data.flatMap((a) => [a, ...a.chinden]);
+const flatDara = dsaf.flatMap((a) => [a, ...a.chinden]);
+const flatData = [...flatDara, ...flatDara[6].chinden];
+const EMAIL = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 const App = document.getElementById("project");
 
 const [email, emailSet] = simpleStatuts("");
@@ -164,8 +165,8 @@ const renderSeketon = () => {
       <h3 class='row'>Loadding...</h3>
       <div class="seketon-color row"></div>
       </div>
-</div>`
-}
+</div>`;
+};
 
 const renderdata = () => {
   App.innerHTML = `
@@ -175,8 +176,14 @@ const renderdata = () => {
             <p class="logo-login">${email().slice(0, 1).toLocaleUpperCase()}</p>
           </div>
           <div class="col-10">
-            <p class="name-user">${email().slice(0, email().indexOf("@")).length>20?email().slice(0, email().indexOf("@")).slice(0,20)+'...':email().slice(0, email().indexOf("@"))}</p>
-            <p class="email-user">${email().length>23?email().slice(0,23)+'...':email()}</p>
+            <p class="name-user">${
+              email().slice(0, email().indexOf("@")).length > 20
+                ? email().slice(0, email().indexOf("@")).slice(0, 20) + "..."
+                : email().slice(0, email().indexOf("@"))
+            }</p>
+            <p class="email-user">${
+              email().length > 23 ? email().slice(0, 23) + "..." : email()
+            }</p>
           </div>
         </div>
         <div class="nav-list-items">
@@ -238,14 +245,17 @@ const renderdata = () => {
         </div>
       </nav>
       <div class="head-table p-relative">
-      ${header()}
+      <div class='header-hese p-relative'>${header()}</div>
+
 
         <div class="tree-table row">
         <div class='tree-table-left'>
         <div class='name-tre'>
             <p>My folder</p>
         </div>
+        <div class='render-data'>
         ${renderFolder(data)}
+        </div>
         </div>
         <div class='tree-table-right'>
             <div class='name-tre row name-tre-1'>
@@ -267,18 +277,15 @@ const handlSubmit = (event) => {
   event.preventDefault();
   const inputval = document.querySelector(".input-res");
   emailSet(inputval.value);
-  if (!EMAIL.test( email())) { 
-    alert('Hay nhap dia chi email hop le.\nExample@gmail.com');
-    return false; 
+  if (!EMAIL.test(email())) {
+    alert("Hay nhap dia chi email hop le.\nExample@gmail.com");
+    return false;
+  } else {
+    inputval.value = "";
+    frFom.classList.toggle("d-none");
+    renderSeketon();
+    setTimeout(renderdata, 3000);
   }
-  else{ 
-  inputval.value = "";
-  frFom.classList.toggle("d-none");
-  renderSeketon();
-  setTimeout(renderdata,3000)
-  } 
-
-
 };
 
 const header = () => {
@@ -296,22 +303,35 @@ const header = () => {
         </div>
         <div class="item-right">
           <div class="row a-center">
-              <input class='d-none' type='file' id='file' name='file'/>
-            <label for='file' class="upload row a-center">
-              <img class="color-icon" src="./img/ArrowLineUp.svg" alt="upload" />
-              <p class="upload-text">Upload</p>
-            </label>
+              <input onchange='handlOnfile(event)' class='d-none' type='file' id='file' name='file'/>
+              <label for='file' class="upload row a-center">
+                <img class="color-icon" src="./img/ArrowLineUp.svg" alt="upload" />
+                <p class="upload-text">Upload</p>
+              </label>
             <button onclick='handleClickShow()'>
-            <img class='color-icon lager' src="./img/MagnifyingGlass.svg" alt="Soi" />
+              <img class='color-icon lager' src="./img/MagnifyingGlass.svg" alt="Soi" />
             </button>
-            <button class="addfile">
+            <button onclick='handlClickAdd()' class="addfile">
               <img
                 class="color-icon lager"
                 src="./img/FolderNotchPlus.svg"
                 alt=""
               />
             </button>
-            <button class="addfile">
+            <div class='form-add p-absolute row a-center j-center d-none'>
+                <div class='form-add-items row a-center j-center'>
+                  <div class='form-add-item'>
+                   <h3>Tạo mới folder</h3>
+                  <input class='input-create' type='text' placeholder='Nhập tên folder' />
+                  <div class='team-butn row a-center j-end'>
+                  <div onclick='handlClickAdd(event)' class='but-tn'>Không</div>
+                  <div onclick ='hanldCkickAddtree(event)' class='but-tn'>Tạo mới</div>
+                  </div>
+                  </div>
+
+                </div>
+              </div>
+            <button  class="addfile">
               <img class="color-icon lager" src="./img/Table.svg" alt="" />
             </button>
           </div>
@@ -336,9 +356,44 @@ const handlChane = (event) => {
 const handlClickFilter = () => {
   const asc = document.querySelector(".table-right-item");
   console.log(sear());
-  const find = flatData.filter((a)=>a.name.toLocaleLowerCase().includes(sear().toLocaleLowerCase()))
-  asc.innerHTML= renderFolderFilter(find)
+  const find = flatData.filter((a) =>
+    a.name.toLocaleLowerCase().includes(sear().toLocaleLowerCase())
+  );
+  asc.innerHTML = renderFolderFilter(find);
   document.querySelector(".center-header").classList.toggle("d-none");
+};
+
+const [fileo, fileoSet] = simpleStatuts("");
+
+const handlOnfile = (event) => {
+  fileoSet(event.target.files[0].name);
+    const newonj = {
+      id: 40 + data.length,
+      url: "./img/JPG.svg",
+      img: "",
+      name: fileo().length<15? fileo() : fileo().slice(0,14)+'...',
+      chinden: null,
+    }
+   let na = newonj.name
+    .slice(newonj.name.indexOf(".") + 1)
+    .toLocaleLowerCase()
+  if (
+    na === "jpeg" ||
+    na === "jpg" ||
+    na === "pdf" ||
+    na === "gif" ||
+    na === "fsd" ||
+    na === "row" ||
+    na === "ai" ||
+    na === "eps"
+  ) {
+    data.push(newonj);
+  } else {
+    newonj.url = "./img/DOC.svg";
+    return data.push(newonj);
+  }
+
+renderFolder(data)
 };
 
 const renderFolder = (obj) => {
@@ -348,7 +403,8 @@ const renderFolder = (obj) => {
     obj
       .map(
         (a) => `
-        <div id='a${a.id}' onclick='handlClickFolder(${a.id})' class='row folder-item j-between a-center'>
+        <div>
+        <div onclick='handlClickFolder(${a.id})' class='row folder-item j-between a-center'>  
             <div class='row a-center items'>
                 <img class='color-icon-folder' src='${a.url}'/>
                 <p>${a.name}</p>
@@ -356,6 +412,10 @@ const renderFolder = (obj) => {
             <div class='icon-tree'>
                 <img src='./img/CaretRight.svg'/>
             </div>
+            </div>
+
+            <div class='header-here p-absolute header-items-tre'></div>
+
         </div>
     `
       )
@@ -398,6 +458,7 @@ const renderFolderFilter = (obj) => {
             <div class='icon-tree'>
                 <img src='./img/DotsThreeVertical.svg'/>
             </div>
+
      </div>
 
         `
@@ -409,21 +470,22 @@ const [fixName, fixNameSet] = simpleStatuts("");
 const [trs, trsSet] = simpleStatuts(false);
 let aray;
 const handlClickFolder = (id) => {
-  trsSet(!trs())
-    const nameLink = document.querySelector(".numbe1");
+  trsSet(!trs());
+  const nameLink = document.querySelector(".numbe1");
   const nameLink1 = document.querySelector(".numbe2");
   const nameLink2 = document.querySelector(".numbe3");
   const asc = document.querySelector(".table-right-item");
-  
-  const arr = data.find((a) =>{ 
-    fixNameSet(a.name)
+  const headed = document.querySelector('.header-hese')
+  headed.innerHTML=renderHeader(id);
+
+  const arr = data.find((a) => {
+    fixNameSet(a.name);
     return a.id === id;
+  });
 
-});
-
-nameLink.innerHTML=`<p onclick='handlClickFolder(${id})' class='numbet1 row a-center'><img src='./img/CaretRight.svg'> ${fixName()}</p>`
-nameLink1.style.display='none';
-nameLink2.style.display='none';
+  nameLink.innerHTML = `<p onclick='handlClickFolder(${id})' class='numbet1 row a-center'><img src='./img/CaretRight.svg'> ${fixName()}</p>`;
+  nameLink1.style.display = "none";
+  nameLink2.style.display = "none";
   if (arr.chinden === null) {
     console.log("khong co thu muc");
   } else if (arr.chinden.length === 0) asc.innerHTML = "Thư mục này trống";
@@ -436,19 +498,20 @@ nameLink2.style.display='none';
 const [fixName1, fixName1Set] = simpleStatuts("");
 let aray2;
 const handlC2 = (id) => {
-const nameLink = document.querySelector(".numbe1");
+  const nameLink = document.querySelector(".numbe1");
   const nameLink1 = document.querySelector(".numbe2");
   const nameLink2 = document.querySelector(".numbe3");
+  const headed = document.querySelector('.header-hese')
+  headed.innerHTML=renderHeader(id);
 
   const asc = document.querySelector(".table-right-item");
-  const arr2 = aray.find((a) =>{ 
-    fixName1Set(a.name)
+  const arr2 = aray.find((a) => {
+    fixName1Set(a.name);
     return a.id === id;
-
-});
-nameLink1.style.display='block';
-nameLink1.innerHTML=`<p onclick='handlC2(${id})' class='numbet1 row a-center'><img src='./img/CaretRight.svg'> ${fixName1()}</p>`
-nameLink2.style.display='none';
+  });
+  nameLink1.style.display = "block";
+  nameLink1.innerHTML = `<p onclick='handlC2(${id})' class='numbet1 row a-center'><img src='./img/CaretRight.svg'> ${fixName1()}</p>`;
+  nameLink2.style.display = "none";
   if (arr2.chinden === null) {
     console.log("khong co thu muc");
   } else if (arr2.chinden.length === 0) asc.innerHTML = "Thư mục này trống";
@@ -473,23 +536,50 @@ nameLink2.style.display='none';
   aray2 = arr2.chinden;
 };
 
+const handlClickAdd = (event) => {
+  const acsc = document.querySelector(".form-add");
+  acsc.classList.toggle("d-none");
+};
+
+const hanldCkickAddtree = (event) => {
+  event.preventDefault();
+  const iputvl = document.querySelector(".input-create");
+  const redr = document.querySelector(".render-data");
+  const acsc = document.querySelector(".form-add");
+
+  const myobj = {
+    id: 19 + data.length,
+    name: iputvl.value,
+    url: "./img/Vector.svg",
+    img: "",
+    chinden: [],
+  };
+  if (myobj.name.length > 2) {
+    data.push(myobj);
+    redr.innerHTML = renderFolder(data);
+    iputvl.value = "";
+    acsc.classList.toggle("d-none");
+  } else alert("Nhập ít nhất 3 ký tự");
+};
+
 let aray3;
 const [fixName2, fixName2Set] = simpleStatuts("");
 const handlC23 = (id) => {
-    const nameLink = document.querySelector(".numbe1");
-    const nameLink1 = document.querySelector(".numbe2");
-    const nameLink2 = document.querySelector(".numbe3");
+  const nameLink = document.querySelector(".numbe1");
+  const nameLink1 = document.querySelector(".numbe2");
+  const nameLink2 = document.querySelector(".numbe3");
+  const headed = document.querySelector('.header-hese')
+  headed.innerHTML=renderHeader(id);
 
   const asc = document.querySelector(".table-right-item");
-  const arr2 = aray2.find((a) => { 
-    fixName2Set(a.name)
+  const arr2 = aray2.find((a) => {
+    fixName2Set(a.name);
     return a.id === id;
-
-});
-nameLink2.style.display='block';
-nameLink2.innerHTML=`<p onclick='handlC23(${id})' class='numbet1 row a-center'>
+  });
+  nameLink2.style.display = "block";
+  nameLink2.innerHTML = `<p onclick='handlC23(${id})' class='numbet1 row a-center'>
 <img src='./img/CaretRight.svg'>
-${fixName2()}</p>`
+${fixName2()}</p>`;
   if (arr2.chinden === null) {
     console.log("khong co muc");
   } else if (arr2.chinden.length === 0)
@@ -513,18 +603,21 @@ ${fixName2()}</p>`
       .join(",")
       .replaceAll(/,/g, "");
   }
-  console.log(arr2.chinden)
-  aray3=aray2.chinden;
+  console.log(arr2.chinden);
+  aray3 = aray2.chinden;
 };
 
 const handlC234 = (id) => {
+  const headed = document.querySelector('.header-hese')
+  headed.innerHTML=renderHeader(id);
   console.log("chay roi");
 };
 
-
 const handlClickSearh = (id) => {
   const asc = document.querySelector(".table-right-item");
-  const arr4 = flatData.find((a) =>a.id === id);
+  const headed = document.querySelector('.header-hese')
+  headed.innerHTML=renderHeader(id);
+  const arr4 = flatData.find((a) => a.id === id);
   if (arr4.chinden === null) {
     console.log("khong co muc");
   } else if (arr4.chinden.length === 0)
@@ -548,6 +641,77 @@ const handlClickSearh = (id) => {
       .join(",")
       .replaceAll(/,/g, "");
   }
+};
 
+
+const renderHeader = (id) => {
+  return `
+  
+  <header id='a${id}' class="header row a-center j-between ">
+            <div class="item-left">
+              <div class="row a-center">
+                <div class="icon-main">
+                  <img class="color-icon" src="./img/DotsNine.svg" alt="9 chấm" />
+                </div>
+                <div class="text-main">
+                  <p class="text-main-text">My Dive</p>
+                </div>
+              </div>
+            </div>
+            <div class="item-right">
+              <div class="row a-center">
+                  <input onchange='handlOnfile(event)' class='d-none' type='file' id='file' name='file'/>
+                  <label for='file' class="upload row a-center">
+                    <img class="color-icon" src="./img/ArrowLineUp.svg" alt="upload" />
+                    <p class="upload-text">Upload</p>
+                  </label>
+                <button onclick='handleClickShow()' >
+                  <img class='color-icon lager' src="./img/MagnifyingGlass.svg" alt="Soi" />
+                </button>
+                <button  class="addfile">
+                  <img
+                    class="color-icon lager"
+                    src="./img/FolderNotchPlus.svg"
+                    alt=""
+                  />
+                </button>
+                <div class='form-add p-absolute row a-center j-center d-none'>
+                    <div class='form-add-items row a-center j-center'>
+                      <div class='form-add-item'>
+                       <h3>Tạo mới folder</h3>
+                      <input class='input-create' type='text' placeholder='Nhập tên folder' />
+                      <div class='team-butn row a-center j-end'>
+                      <div  class='but-tn'>Không</div>
+                      <div  class='but-tn'>Tạo mới</div>
+                      </div>
+                      </div>
+    
+                    </div>
+                  </div>
+                <button  class="addfile">
+                  <img class="color-icon lager" src="./img/Table.svg" alt="" />
+                </button>
+              </div>
+            </div>
+            <div class="center-header p-absolute row a-center j-center d-none">       
+            <input onchange='handlChane(event)' class="input-header p-relative" type="text" placeholder="Tìm kiếm mọi thứ" />
+            <button onclick='handlClickFilter(${id})' class='btn-header-input p-absolute'>Tìm kiếm</button>
+           </div>
+          </header>
+  `
 }
 
+// const [setI,setISet] = simpleStatuts('')
+// const handlChane1 = (event) => {
+//   setISet(event.target.value);
+// };
+
+// const handlClickFilter2 = (id) => {
+//   const asc = document.querySelector(".table-right-item");
+//   console.log(setI());
+//   const find = flatData.filter((a) =>
+//     a.name.toLocaleLowerCase().includes(setI().toLocaleLowerCase())
+//   );
+//   asc.innerHTML = renderFolderFilter(find);
+//   document.querySelector(".center-header").classList.toggle("d-none");
+// };
