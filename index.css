@@ -167,12 +167,18 @@ label:hover {
 
 .tree-table-left {
     width: 200px;
-    height: calc(100vh - 55.5px);
+    height: calc(100vh - 56px);
 }
 
 .tree-table-right {
     width: calc(100% - 200px);
     background-color: #FAFAFA;
+
+}
+
+.table-right-item{
+    overflow-y: auto;
+    height: calc(100vh - 92px);
 }
 .name-tre{
     padding: 10px;
@@ -181,39 +187,78 @@ label:hover {
 }
 .name-tre p{
     font-size: .8rem;
-    cursor: pointer;
 }
-.name-tre p:hover{
+.name-tre p:not(p.numbe):hover{
     font-weight: 600;
     transition: all .3s linear;
+    cursor: pointer;
 }
+
 
 .folder-item {
     padding: 10px;
+}
+.folder-item-2{
+    padding: 8px;
 }
 
 .items img{
     filter: invert(80%) sepia(32%) saturate(384%) hue-rotate(360deg)
     brightness(104%) contrast(105%);
-  margin-right: 4px;
+  margin-right: 8px;
 }
 
 .items p {
     font-size: .7rem;
 }
 
-.folder-item:hover {
-    background-color: var(--hover-item-color);
+.items p:hover {
+    font-weight: 600;
+    transition: all .3s linear;
     cursor: pointer;
 }
-.folder-item:hover .items p{
+
+
+.folder-item:hover,
+.folder-item-2:hover {
+    background-color: var(--hover-item-color);
+}
+.folder-item:hover .items p,
+.folder-item-2:hover .items p{
     color: var(--secondary-text);
 }
-.folder-item:hover .icon-tree img{
+.folder-item:hover .icon-tree img,
+.folder-item-2:hover .icon-tree img{
     filter: invert(80%) sepia(32%) saturate(384%) hue-rotate(360deg)
     brightness(104%) contrast(105%);
 }
 
 .table-right-item {
     text-align: center;
+}
+.seketon{
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0 50px;
+}
+.seketon-items{
+    text-align: center;
+    width: 100%;
+}
+
+.seketon-color{
+    width: 1%;
+    height: 20px;
+    border-radius:10px;
+    background:linear-gradient(45deg,#0099F7,#F11712);
+    animation: loadding 3s linear;
+}
+
+@keyframes loadding {
+    0% { width: 10%; }
+    25% { width: 25%; }
+    50% { width: 50%; }
+    75% { width: 75%; }
+    100% { width: 100%; }
 }

@@ -12,33 +12,39 @@ const data = [
   {
     id: 1,
     url: "./img/Vector.svg",
+    img:"",
     name: "Doccument",
     chinden: [
       {
         id: 2,
         url: "./img/Vector.svg",
+        img:"",
         name: "Setup",
         chinden: [],
       },
       {
         id: 3,
         url: "./img/Vector.svg",
+        img:"",
         name: "Tài liệu",
         chinden: [
           {
             id: 4,
             url: "./img/Vector.svg",
+            img:"",
             name: "Tài liệu mật",
             chinden: [
               {
                 id: 5,
                 url: "./img/DOC.svg",
+                img:"",
                 name: "Hướng đẫn tán gái để lấy làm vợ.doc",
                 chinden: null,
               },
               {
                 id: 6,
                 url: "./img/DOC.svg",
+                img:"",
                 name: "Hướng đẫn xấu trai vẫn lấy được vợ.doc",
                 chinden: null,
               },
@@ -47,12 +53,14 @@ const data = [
           {
             id: 7,
             url: "./img/DOC.svg",
+            img:"",
             name: "Bài tập của tôi.doc",
             chinden: null,
           },
           {
             id: 8,
             url: "./img/DOC.svg",
+            img:"",
             name: "Hướng dẫn làm đề án.doc",
             chinden: null,
           },
@@ -61,6 +69,7 @@ const data = [
       {
         id: 9,
         url: "./img/Vector.svg",
+        img:"",
         name: "Ảnh của tôi",
         chinden: [
           {
@@ -98,27 +107,31 @@ const data = [
   {
     id: 14,
     url: "./img/Vector.svg",
+    img:"",
     name: "Doccument 1",
     chinden: [],
   },
   {
     id: 15,
     url: "./img/Vector.svg",
+    img:"",
     name: "Doccument 2",
     chinden: [],
   },
   {
     id: 16,
     url: "./img/Vector.svg",
+    img:"",
     name: "Doccument 3",
     chinden: [],
   },
 ];
 
-console.log(data);
 
-const EMAIL_REGEX =
-  /\A[a-zA-Z0-9.!\#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/;
+const dsaf = data.flatMap(a=>[a,...a.chinden])
+const flatDara = dsaf.flatMap((a)=>[a,...a.chinden])
+const flatData = [...flatDara,...flatDara[6].chinden]
+const EMAIL = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
 const App = document.getElementById("project");
 
 const [email, emailSet] = simpleStatuts("");
@@ -144,6 +157,15 @@ const renderForm = () => {
     </div>`;
 };
 renderForm();
+
+const renderSeketon = () => {
+  App.innerHTML = `<div class="seketon p-absolute row j-start a-center">
+      <div class='seketon-items'>
+      <h3 class='row'>Loadding...</h3>
+      <div class="seketon-color row"></div>
+      </div>
+</div>`
+}
 
 const renderdata = () => {
   App.innerHTML = `
@@ -245,9 +267,18 @@ const handlSubmit = (event) => {
   event.preventDefault();
   const inputval = document.querySelector(".input-res");
   emailSet(inputval.value);
+  if (!EMAIL.test( email())) { 
+    alert('Hay nhap dia chi email hop le.\nExample@gmail.com');
+    return false; 
+  }
+  else{ 
   inputval.value = "";
   frFom.classList.toggle("d-none");
-  renderdata();
+  renderSeketon();
+  setTimeout(renderdata,3000)
+  } 
+
+
 };
 
 const header = () => {
@@ -303,8 +334,10 @@ const handlChane = (event) => {
 };
 
 const handlClickFilter = () => {
+  const asc = document.querySelector(".table-right-item");
   console.log(sear());
-  //code logic o day
+  const find = flatData.filter((a)=>a.name.toLocaleLowerCase().includes(sear().toLocaleLowerCase()))
+  asc.innerHTML= renderFolderFilter(find)
   document.querySelector(".center-header").classList.toggle("d-none");
 };
 
@@ -315,7 +348,7 @@ const renderFolder = (obj) => {
     obj
       .map(
         (a) => `
-        <div onclick='handlClickFolder(${a.id})' class='row folder-item j-between a-center'>
+        <div id='a${a.id}' onclick='handlClickFolder(${a.id})' class='row folder-item j-between a-center'>
             <div class='row a-center items'>
                 <img class='color-icon-folder' src='${a.url}'/>
                 <p>${a.name}</p>
@@ -323,7 +356,6 @@ const renderFolder = (obj) => {
             <div class='icon-tree'>
                 <img src='./img/CaretRight.svg'/>
             </div>
-
         </div>
     `
       )
@@ -337,10 +369,31 @@ const renderFolderbig = (obj) => {
   return (out += obj
     .map(
       (a) => `
-        <div onclick='handlC2(${a.id})' class='row folder-item j-between a-center'>
-            <div class='row a-center items'>
+        <div class=' row folder-item-2 j-between a-center'>
+            <div  class='row a-center items'>
                 <img class='color-icon-folder' src='${a.url}'/>
-                <p>${a.name}</p>
+                <p onclick='handlC2(${a.id})' >${a.name}</p>
+            </div>
+            <div class='icon-tree'>
+                <img src='./img/DotsThreeVertical.svg'/>
+            </div>
+     </div>
+
+        `
+    )
+    .join(",")
+    .replaceAll(/,/g, ""));
+};
+
+const renderFolderFilter = (obj) => {
+  let out = "";
+  return (out += obj
+    .map(
+      (a) => `
+        <div  class='row folder-item-2 j-between a-center'>
+            <div  class='row a-center items'>
+                <img class='color-icon-folder' src='${a.url}'/>
+                <p onclick='handlClickSearh(${a.id})' >${a.name}</p>
             </div>
             <div class='icon-tree'>
                 <img src='./img/DotsThreeVertical.svg'/>
@@ -353,12 +406,15 @@ const renderFolderbig = (obj) => {
     .replaceAll(/,/g, ""));
 };
 const [fixName, fixNameSet] = simpleStatuts("");
+const [trs, trsSet] = simpleStatuts(false);
 let aray;
 const handlClickFolder = (id) => {
+  trsSet(!trs())
     const nameLink = document.querySelector(".numbe1");
   const nameLink1 = document.querySelector(".numbe2");
   const nameLink2 = document.querySelector(".numbe3");
   const asc = document.querySelector(".table-right-item");
+  
   const arr = data.find((a) =>{ 
     fixNameSet(a.name)
     return a.id === id;
@@ -399,10 +455,10 @@ nameLink2.style.display='none';
   else {
     asc.innerHTML = arr2.chinden
       .map((a) => {
-        return `<div onclick='handlC23(${a.id})' class='row folder-item j-between a-center'>
+        return `<div  class='row folder-item-2 j-between a-center'>
                     <div class='row a-center items'>
                         <img class='color-icon-folder' src='${a.url}'/>
-                        <p>${a.name}</p>
+                        <p onclick='handlC23(${a.id})'>${a.name}</p>
                     </div>
                     <div class='icon-tree'>
                         <img src='./img/DotsThreeVertical.svg'/>
@@ -416,6 +472,8 @@ nameLink2.style.display='none';
   }
   aray2 = arr2.chinden;
 };
+
+let aray3;
 const [fixName2, fixName2Set] = simpleStatuts("");
 const handlC23 = (id) => {
     const nameLink = document.querySelector(".numbe1");
@@ -433,17 +491,17 @@ nameLink2.innerHTML=`<p onclick='handlC23(${id})' class='numbet1 row a-center'>
 <img src='./img/CaretRight.svg'>
 ${fixName2()}</p>`
   if (arr2.chinden === null) {
-    console.log("khong co thu muc");
+    console.log("khong co muc");
   } else if (arr2.chinden.length === 0)
     asc.innerHTML = `<p style="padding: 10px;">Thư mục này trống</p>`;
   else {
     asc.innerHTML = arr2.chinden
       .map(
         (a) => `
-                <div onclick='handlC234(${a.id})' class='row folder-item j-between a-center'>
+                <div  class='row folder-item-2 j-between a-center'>
                     <div class='row a-center items'>
                         <img class='color-icon-folder' src='${a.url}'/>
-                        <p>${a.name}</p>
+                        <p onclick='handlC234(${a.id})' >${a.name}</p>
                     </div>
                     <div class='icon-tree'>
                         <img src='./img/DotsThreeVertical.svg'/>
@@ -455,8 +513,41 @@ ${fixName2()}</p>`
       .join(",")
       .replaceAll(/,/g, "");
   }
+  console.log(arr2.chinden)
+  aray3=aray2.chinden;
 };
 
 const handlC234 = (id) => {
   console.log("chay roi");
 };
+
+
+const handlClickSearh = (id) => {
+  const asc = document.querySelector(".table-right-item");
+  const arr4 = flatData.find((a) =>a.id === id);
+  if (arr4.chinden === null) {
+    console.log("khong co muc");
+  } else if (arr4.chinden.length === 0)
+    asc.innerHTML = `<p style="padding: 10px;">Thư mục này trống</p>`;
+  else {
+    asc.innerHTML = arr4.chinden
+      .map(
+        (a) => `
+                <div  class='row folder-item-2 j-between a-center'>
+                    <div class='row a-center items'>
+                        <img class='color-icon-folder' src='${a.url}'/>
+                        <p onclick='handlC234(${a.id})' >${a.name}</p>
+                    </div>
+                    <div class='icon-tree'>
+                        <img src='./img/DotsThreeVertical.svg'/>
+                    </div>
+             </div>
+        
+                `
+      )
+      .join(",")
+      .replaceAll(/,/g, "");
+  }
+
+}
+
