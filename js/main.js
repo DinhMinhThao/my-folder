@@ -1,5 +1,3 @@
-
-
 const simpleStatuts = (initial) => {
   let val = initial;
   return [
@@ -132,6 +130,9 @@ const data = [
 const dsaf = data.flatMap((a) => [a, ...a.chinden]);
 const flatDara = dsaf.flatMap((a) => [a, ...a.chinden]);
 const flatData = [...flatDara, ...flatDara[6].chinden];
+let delData=[];
+let RecenData=[];
+
 const EMAIL = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 const App = document.getElementById("project");
 
@@ -245,7 +246,7 @@ const renderdata = () => {
         </div>
       </nav>
       <div class="head-table p-relative">
-      <div class='header-hese p-relative'>${header()}</div>
+      <div class='header-hese '>${header()}</div>
 
 
         <div class="tree-table row">
@@ -340,6 +341,7 @@ const header = () => {
         <input onchange='handlChane(event)' class="input-header p-relative" type="text" placeholder="Tìm kiếm mọi thứ" />
         <button onclick='handlClickFilter()' class='btn-header-input p-absolute'>Tìm kiếm</button>
        </div>
+       <button onclick='hanldReload(event)' class='btn-upload-fike p-absolute' >Tải lại Upload</button>
       </header>
   `;
 };
@@ -366,17 +368,18 @@ const handlClickFilter = () => {
 const [fileo, fileoSet] = simpleStatuts("");
 
 const handlOnfile = (event) => {
+  const casd = document.querySelector(".render-data");
   fileoSet(event.target.files[0].name);
-    const newonj = {
-      id: 40 + data.length,
-      url: "./img/JPG.svg",
-      img: "",
-      name: fileo().length<15? fileo() : fileo().slice(0,14)+'...',
-      chinden: null,
-    }
-   let na = newonj.name
-    .slice(newonj.name.indexOf(".") + 1)
-    .toLocaleLowerCase()
+  const newonj = {
+    id: 40 + data.length,
+    url: "./img/JPG.svg",
+    img: "",
+    name: fileo().length < 15 ? fileo() : fileo().slice(0, 14) + "...",
+    chinden: null,
+  };
+  flatData.push(newonj);
+  RecenData.push(newonj);
+  let na = newonj.name.slice(newonj.name.indexOf(".") + 1).toLocaleLowerCase();
   if (
     na === "jpeg" ||
     na === "jpg" ||
@@ -387,16 +390,18 @@ const handlOnfile = (event) => {
     na === "ai" ||
     na === "eps"
   ) {
-    data.push(newonj);
+
+   data.push(newonj);
   } else {
     newonj.url = "./img/DOC.svg";
-    return data.push(newonj);
+     data.push(newonj);
   }
 
-renderFolder(data)
+  casd.innerHTML= renderFolder(data);
 };
-
+let adfads;
 const renderFolder = (obj) => {
+  adfads=obj;
   let outpt = "";
   return (
     outpt +
@@ -423,6 +428,7 @@ const renderFolder = (obj) => {
       .replaceAll(/,/g, "")
   );
 };
+
 
 const renderFolderbig = (obj) => {
   let out = "";
@@ -475,8 +481,7 @@ const handlClickFolder = (id) => {
   const nameLink1 = document.querySelector(".numbe2");
   const nameLink2 = document.querySelector(".numbe3");
   const asc = document.querySelector(".table-right-item");
-  const headed = document.querySelector('.header-hese')
-  headed.innerHTML=renderHeader(id);
+  const headed = document.querySelector(".header-hese");
 
   const arr = data.find((a) => {
     fixNameSet(a.name);
@@ -493,6 +498,7 @@ const handlClickFolder = (id) => {
     asc.innerHTML = renderFolderbig(arr.chinden);
   }
   aray = arr.chinden;
+  headed.innerHTML = renderHeader(id, aray);
 };
 
 const [fixName1, fixName1Set] = simpleStatuts("");
@@ -500,9 +506,8 @@ let aray2;
 const handlC2 = (id) => {
   const nameLink = document.querySelector(".numbe1");
   const nameLink1 = document.querySelector(".numbe2");
+  const headed = document.querySelector(".header-hese");
   const nameLink2 = document.querySelector(".numbe3");
-  const headed = document.querySelector('.header-hese')
-  headed.innerHTML=renderHeader(id);
 
   const asc = document.querySelector(".table-right-item");
   const arr2 = aray.find((a) => {
@@ -534,6 +539,7 @@ const handlC2 = (id) => {
       .replaceAll(/,/g, "");
   }
   aray2 = arr2.chinden;
+  headed.innerHTML = renderHeader(id, aray2);
 };
 
 const handlClickAdd = (event) => {
@@ -554,6 +560,8 @@ const hanldCkickAddtree = (event) => {
     img: "",
     chinden: [],
   };
+  flatData.push(myobj);
+  RecenData.push(myobj);
   if (myobj.name.length > 2) {
     data.push(myobj);
     redr.innerHTML = renderFolder(data);
@@ -568,8 +576,7 @@ const handlC23 = (id) => {
   const nameLink = document.querySelector(".numbe1");
   const nameLink1 = document.querySelector(".numbe2");
   const nameLink2 = document.querySelector(".numbe3");
-  const headed = document.querySelector('.header-hese')
-  headed.innerHTML=renderHeader(id);
+  const headed = document.querySelector(".header-hese");
 
   const asc = document.querySelector(".table-right-item");
   const arr2 = aray2.find((a) => {
@@ -603,20 +610,20 @@ ${fixName2()}</p>`;
       .join(",")
       .replaceAll(/,/g, "");
   }
-  console.log(arr2.chinden);
   aray3 = aray2.chinden;
+  headed.innerHTML = renderHeader(id, aray3);
 };
 
 const handlC234 = (id) => {
-  const headed = document.querySelector('.header-hese')
-  headed.innerHTML=renderHeader(id);
+  const headed = document.querySelector(".header-hese");
+  headed.innerHTML = renderHeader(id);
   console.log("chay roi");
 };
 
 const handlClickSearh = (id) => {
   const asc = document.querySelector(".table-right-item");
-  const headed = document.querySelector('.header-hese')
-  headed.innerHTML=renderHeader(id);
+  const headed = document.querySelector(".header-hese");
+  headed.innerHTML = renderHeader(id);
   const arr4 = flatData.find((a) => a.id === id);
   if (arr4.chinden === null) {
     console.log("khong co muc");
@@ -643,11 +650,12 @@ const handlClickSearh = (id) => {
   }
 };
 
-
-const renderHeader = (id) => {
+let aisz;
+const renderHeader = (id, obj) => {
+  aisz = obj;
   return `
   
-  <header id='a${id}' class="header row a-center j-between ">
+  <header class="header row a-center j-between ">
             <div class="item-left">
               <div class="row a-center">
                 <div class="icon-main">
@@ -660,7 +668,7 @@ const renderHeader = (id) => {
             </div>
             <div class="item-right">
               <div class="row a-center">
-                  <input onchange='handlOnfile(event)' class='d-none' type='file' id='file' name='file'/>
+                  <input onchange='handlOnfile1(event)' class='d-none' type='file' id='file' name='file'/>
                   <label for='file' class="upload row a-center">
                     <img class="color-icon" src="./img/ArrowLineUp.svg" alt="upload" />
                     <p class="upload-text">Upload</p>
@@ -668,26 +676,29 @@ const renderHeader = (id) => {
                 <button onclick='handleClickShow()' >
                   <img class='color-icon lager' src="./img/MagnifyingGlass.svg" alt="Soi" />
                 </button>
-                <button  class="addfile">
+                <button  onclick='handlClickAdd1(event,${id})'   class="addfile">
                   <img
                     class="color-icon lager"
                     src="./img/FolderNotchPlus.svg"
                     alt=""
                   />
                 </button>
-                <div class='form-add p-absolute row a-center j-center d-none'>
+                <div  id='a${id}' class='form-add p-absolute row a-center j-center d-none'>
                     <div class='form-add-items row a-center j-center'>
                       <div class='form-add-item'>
                        <h3>Tạo mới folder</h3>
-                      <input class='input-create' type='text' placeholder='Nhập tên folder' />
+                      <input id='b${id}' class='input-create' type='text' placeholder='Nhập tên folder' />
                       <div class='team-butn row a-center j-end'>
-                      <div  class='but-tn'>Không</div>
-                      <div  class='but-tn'>Tạo mới</div>
+                      <div onclick='handlClickAdd1(event,${id})'  class='but-tn'>Không</div>
+                      <div onclick='hanldCkickAddtree1(event,${id})' class='but-tn'>Tạo mới</div>
                       </div>
                       </div>
     
                     </div>
                   </div>
+                  <button onclick='handlDetele1(${id})' >
+                  <img class='color-icon lager' src='./img/Trash.svg' alt='thung rac'/>
+                  </button>
                 <button  class="addfile">
                   <img class="color-icon lager" src="./img/Table.svg" alt="" />
                 </button>
@@ -695,23 +706,90 @@ const renderHeader = (id) => {
             </div>
             <div class="center-header p-absolute row a-center j-center d-none">       
             <input onchange='handlChane(event)' class="input-header p-relative" type="text" placeholder="Tìm kiếm mọi thứ" />
-            <button onclick='handlClickFilter(${id})' class='btn-header-input p-absolute'>Tìm kiếm</button>
+            <button onclick='handlClickFilter()' class='btn-header-input p-absolute'>Tìm kiếm</button>
            </div>
+           <button onclick='hanldReload1(event)' class='btn-upload-fike p-absolute' >Tải lại Upload</button>
           </header>
-  `
+  `;
+};
+const handlClickAdd1 = (event, id) => {
+  const acsc = document.getElementById(`a${id}`);
+  acsc.classList.toggle("d-none");
+};
+
+const hanldCkickAddtree1 = (event, id) => {
+  event.preventDefault();
+  const iputvl = document.getElementById(`b${id}`);
+  const redr = document.querySelector(".table-right-item");
+  const acsc = document.getElementById(`a${id}`);
+
+  const myobj = {
+    id: 90 + aisz.length,
+    name: iputvl.value,
+    url: "./img/Vector.svg",
+    img: "",
+    chinden: [],
+  };
+  RecenData.push(myobj);
+  flatData.push(myobj);
+  if (myobj.name.length > 2) {
+    aisz.push(myobj);
+    redr.innerHTML = renderFolderbig(aisz);
+    iputvl.value = "";
+    acsc.classList.toggle("d-none");
+  } else alert("Nhập ít nhất 3 ký tự");
+};
+
+const [fileo1, fileo1Set] = simpleStatuts("");
+
+const handlOnfile1 = (event) => {
+  const redr = document.querySelector(".table-right-item");
+  fileo1Set(event.target.files[0].name);
+  const newonj = {
+    id: 200 + aisz.length,
+    url: "./img/JPG.svg",
+    img: "",
+    name: fileo1(),
+    chinden: null,
+  };
+  flatData.push(newonj);
+  RecenData.push(newonj);
+  let na = newonj.name.slice(newonj.name.indexOf(".") + 1).toLocaleLowerCase();
+  if (
+    na === "jpeg" ||
+    na === "jpg" ||
+    na === "pdf" ||
+    na === "gif" ||
+    na === "fsd" ||
+    na === "row" ||
+    na === "ai" ||
+    na === "eps"
+  ) {
+     aisz.push(newonj);
+  } else {
+    newonj.url = "./img/DOC.svg";
+    aisz.push(newonj);
+  }
+
+  redr.innerHTML = renderFolderbig(aisz);
+};
+
+const hanldReload = () => {
+  const redr = document.querySelector(".render-data");
+  redr.innerHTML = renderFolder(data);
+};
+
+
+const hanldReload1 = () => {
+  const redr = document.querySelector(".table-right-item");
+  redr.innerHTML = renderFolderbig(aisz);
+};
+
+const handlDetele1 = (id) => {
+  const redr1 = document.querySelector(".table-right-item");
+  const redr = document.querySelector(".render-data");
+  const del = aisz.find(a=>a.id === id)
+  const redel = aisz.filter(a=>a.id !== id)
+  // redr1.innerHTML = renderFolderbig(redel);
+  console.log(del)
 }
-
-// const [setI,setISet] = simpleStatuts('')
-// const handlChane1 = (event) => {
-//   setISet(event.target.value);
-// };
-
-// const handlClickFilter2 = (id) => {
-//   const asc = document.querySelector(".table-right-item");
-//   console.log(setI());
-//   const find = flatData.filter((a) =>
-//     a.name.toLocaleLowerCase().includes(setI().toLocaleLowerCase())
-//   );
-//   asc.innerHTML = renderFolderFilter(find);
-//   document.querySelector(".center-header").classList.toggle("d-none");
-// };

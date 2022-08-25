@@ -319,3 +319,20 @@ label:hover {
 .header-items-tre {
     right: 0;
 }
+
+.btn-upload-fike{
+    right: 60px;
+    top:50vh;
+    padding: 8px;
+    background-color:#1c7d4e45;
+    color: var(--primary-text);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .3s linear;
+}
+
+.btn-upload-fike:hover {
+    background-color: var(--secondary-color);
+    color: var(--secondary-text);
+    transform: scale(.9);
+}
