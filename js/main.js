@@ -332,6 +332,9 @@ const header = () => {
 
                 </div>
               </div>
+              <button onclick='handlDetele1()' >
+              <img class='color-icon lager' src='./img/Trash.svg' alt='thung rac'/>
+              </button>
             <button  class="addfile">
               <img class="color-icon lager" src="./img/Table.svg" alt="" />
             </button>
@@ -341,7 +344,6 @@ const header = () => {
         <input onchange='handlChane(event)' class="input-header p-relative" type="text" placeholder="Tìm kiếm mọi thứ" />
         <button onclick='handlClickFilter()' class='btn-header-input p-absolute'>Tìm kiếm</button>
        </div>
-       <button onclick='hanldReload(event)' class='btn-upload-fike p-absolute' >Tải lại Upload</button>
       </header>
   `;
 };
@@ -391,13 +393,13 @@ const handlOnfile = (event) => {
     na === "eps"
   ) {
 
-   data.push(newonj);
+    adfads.push(newonj);
   } else {
     newonj.url = "./img/DOC.svg";
-     data.push(newonj);
+    adfads.push(newonj);
   }
 
-  casd.innerHTML= renderFolder(data);
+  casd.innerHTML= renderFolder(adfads);
 };
 let adfads;
 const renderFolder = (obj) => {
@@ -409,10 +411,10 @@ const renderFolder = (obj) => {
       .map(
         (a) => `
         <div>
-        <div onclick='handlClickFolder(${a.id})' class='row folder-item j-between a-center'>  
+        <div onclick='handlGetId(${a.id})' class='row folder-item j-between a-center'>  
             <div class='row a-center items'>
                 <img class='color-icon-folder' src='${a.url}'/>
-                <p>${a.name}</p>
+                <p onclick='handlClickFolder(${a.id})' >${a.name}</p>
             </div>
             <div class='icon-tree'>
                 <img src='./img/CaretRight.svg'/>
@@ -429,13 +431,14 @@ const renderFolder = (obj) => {
   );
 };
 
-
+let csdcc ;
 const renderFolderbig = (obj) => {
+  csdcc = obj;
   let out = "";
   return (out += obj
     .map(
       (a) => `
-        <div class=' row folder-item-2 j-between a-center'>
+        <div onclick='handlGetId(${a.id})' class=' row folder-item-2 j-between a-center'>
             <div  class='row a-center items'>
                 <img class='color-icon-folder' src='${a.url}'/>
                 <p onclick='handlC2(${a.id})' >${a.name}</p>
@@ -483,7 +486,7 @@ const handlClickFolder = (id) => {
   const asc = document.querySelector(".table-right-item");
   const headed = document.querySelector(".header-hese");
 
-  const arr = data.find((a) => {
+  const arr = adfads.find((a) => {
     fixNameSet(a.name);
     return a.id === id;
   });
@@ -523,7 +526,7 @@ const handlC2 = (id) => {
   else {
     asc.innerHTML = arr2.chinden
       .map((a) => {
-        return `<div  class='row folder-item-2 j-between a-center'>
+        return `<div onclick='handlGetId(${a.id})'  class='row folder-item-2 j-between a-center'>
                     <div class='row a-center items'>
                         <img class='color-icon-folder' src='${a.url}'/>
                         <p onclick='handlC23(${a.id})'>${a.name}</p>
@@ -554,7 +557,7 @@ const hanldCkickAddtree = (event) => {
   const acsc = document.querySelector(".form-add");
 
   const myobj = {
-    id: 19 + data.length,
+    id: 19 + adfads.length,
     name: iputvl.value,
     url: "./img/Vector.svg",
     img: "",
@@ -563,8 +566,8 @@ const hanldCkickAddtree = (event) => {
   flatData.push(myobj);
   RecenData.push(myobj);
   if (myobj.name.length > 2) {
-    data.push(myobj);
-    redr.innerHTML = renderFolder(data);
+    adfads.push(myobj);
+    redr.innerHTML = renderFolder(adfads);
     iputvl.value = "";
     acsc.classList.toggle("d-none");
   } else alert("Nhập ít nhất 3 ký tự");
@@ -595,7 +598,7 @@ ${fixName2()}</p>`;
     asc.innerHTML = arr2.chinden
       .map(
         (a) => `
-                <div  class='row folder-item-2 j-between a-center'>
+                <div onclick='handlGetId(${a.id})' class='row folder-item-2 j-between a-center'>
                     <div class='row a-center items'>
                         <img class='color-icon-folder' src='${a.url}'/>
                         <p onclick='handlC234(${a.id})' >${a.name}</p>
@@ -696,7 +699,7 @@ const renderHeader = (id, obj) => {
     
                     </div>
                   </div>
-                  <button onclick='handlDetele1(${id})' >
+                  <button onclick='handlDetele1()' >
                   <img class='color-icon lager' src='./img/Trash.svg' alt='thung rac'/>
                   </button>
                 <button  class="addfile">
@@ -708,7 +711,7 @@ const renderHeader = (id, obj) => {
             <input onchange='handlChane(event)' class="input-header p-relative" type="text" placeholder="Tìm kiếm mọi thứ" />
             <button onclick='handlClickFilter()' class='btn-header-input p-absolute'>Tìm kiếm</button>
            </div>
-           <button onclick='hanldReload1(event)' class='btn-upload-fike p-absolute' >Tải lại Upload</button>
+           
           </header>
   `;
 };
@@ -774,22 +777,20 @@ const handlOnfile1 = (event) => {
   redr.innerHTML = renderFolderbig(aisz);
 };
 
-const hanldReload = () => {
-  const redr = document.querySelector(".render-data");
-  redr.innerHTML = renderFolder(data);
-};
+let idting;
+const handlGetId = (id) => {
+  idting=id;
+}
 
-
-const hanldReload1 = () => {
-  const redr = document.querySelector(".table-right-item");
-  redr.innerHTML = renderFolderbig(aisz);
-};
-
-const handlDetele1 = (id) => {
+const handlDetele1 = () => {
   const redr1 = document.querySelector(".table-right-item");
   const redr = document.querySelector(".render-data");
-  const del = aisz.find(a=>a.id === id)
-  const redel = aisz.filter(a=>a.id !== id)
-  // redr1.innerHTML = renderFolderbig(redel);
-  console.log(del)
+  const del = adfads.find(a=>a.id === idting)
+  const redel = adfads.filter(a=>a.id !== idting)
+  redr.innerHTML = renderFolder(redel);
+
+  const del1 = csdcc.find(a=>a.id === idting )
+  const redel1 = csdcc.filter(a=>a.id !== idting )
+
+  redr1.innerHTML = renderFolderbig(redel1)
 }
