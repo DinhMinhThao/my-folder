@@ -324,8 +324,8 @@ const handlSubmit = (event) => {
 const header = () => {
   return `
   <header class="header row a-center j-between ">
-        <div class="item-left">
-          <div class="row a-center">
+        <div onclick='handlREN2()' class="item-left">
+          <div  class="row a-center">
             <div class="icon-main">
               <img class="color-icon" src="./img/DotsNine.svg" alt="9 chấm" />
             </div>
@@ -358,7 +358,7 @@ const header = () => {
                   <input class='input-create' type='text' placeholder='Nhập tên folder' />
                   <div class='team-butn row a-center j-end'>
                   <div onclick='handlClickAdd()' class='but-tn'>Không</div>
-                  <div onclick ='hanldCkickAddtree(event)' class='but-tn'>Tạo mới</div>
+                  <div onclick ='hanldCkickAddtree(event)' class='but-tn but-tn-1'>Tạo mới</div>
                   </div>
                   </div>
 
@@ -373,8 +373,9 @@ const header = () => {
           </div>
         </div>
         <div class="center-header p-absolute row a-center j-center d-none">       
-        <input onchange='handlChane(event)' class="input-header p-relative" type="text" placeholder="Tìm kiếm mọi thứ" />
-        <button onclick='handlClickFilter()' class='btn-header-input p-absolute'>Tìm kiếm</button>
+          <input onchange='handlChane(event)' class="input-header p-relative" type="text" placeholder="Tìm kiếm mọi thứ" />
+          <button onclick='handlClickFilter()' class='btn-header-input p-absolute'>Tìm kiếm
+          </button>
        </div>
       </header>
   `;
@@ -394,7 +395,7 @@ const handlClickFilter = () => {
   const nameLink = document.querySelector(".numbe1");
   const nameLink1 = document.querySelector(".numbe2");
   const nameLink2 = document.querySelector(".numbe3");
-
+  document.querySelector(".center-header").classList.toggle("d-none");
   const find = flatData.filter((a) =>
     a.name.toLocaleLowerCase().includes(sear().toLocaleLowerCase())
   );
@@ -405,6 +406,7 @@ const handlClickFilter = () => {
   nameLink.style.display = "none";
   nameLink1.style.display = "none";
   nameLink2.style.display = "none";
+
 };
 
 const [fileo, fileoSet] = simpleStatuts("");
@@ -636,6 +638,7 @@ const hanldCkickAddtree = (event) => {
   const iputvl = document.querySelector(".input-create");
   const redr = document.querySelector(".render-data");
   const acsc = document.querySelector(".form-add");
+  const red2s = document.querySelector('.data-render')
 
   const myobj = {
     id: 19 + adfads.length,
@@ -649,6 +652,7 @@ const hanldCkickAddtree = (event) => {
   if (myobj.name.length > 2) {
     adfads.push(myobj);
     redr.innerHTML = renderFolder(adfads);
+    red2s.innerHTML = renderMobieSmaill(adfads)
     iputvl.value = "";
     acsc.classList.toggle("d-none");
   } else alert("Nhập ít nhất 3 ký tự");
@@ -750,7 +754,7 @@ const renderHeader = (id, obj) => {
   return `
   
   <header class="header row a-center j-between ">
-            <div class="item-left">
+            <div onclick='handlREN2()' class="item-left">
               <div class="row a-center">
                 <div class="icon-main">
                   <img class="color-icon" src="./img/DotsNine.svg" alt="9 chấm" />
@@ -784,7 +788,7 @@ const renderHeader = (id, obj) => {
                       <input id='b${id}' class='input-create' type='text' placeholder='Nhập tên folder' />
                       <div class='team-butn row a-center j-end'>
                       <div onclick='handlClickAdd1(event,${id})'  class='but-tn'>Không</div>
-                      <div onclick='hanldCkickAddtree1(event,${id})' class='but-tn'>Tạo mới</div>
+                      <div onclick='hanldCkickAddtree1(event,${id})' class='but-tn but-tn-1'>Tạo mới</div>
                       </div>
                       </div>
     
@@ -1020,7 +1024,7 @@ const handlRecos = () => {
         </div>
     </div>
   `;
-  RecenData.length===0?redr.innerHTML=`<p>Thư mục trống</p>`: 
+  RecenMobie.length===0?redr.innerHTML=`<p>Thư mục trống</p>`: 
   redr.innerHTML = renderMobieSmaill(RecenMobie);
   TextEl.innerHTML=`<p>File và Folder đã thêm gần đây</p>`
   const navbar = document.querySelector(".nav-left")
@@ -1072,6 +1076,14 @@ const handlREN = () => {
   flera.innerHTML = renderTabe(adfads);
   const navbar = document.querySelector(".nav-left")
   navbar.classList.toggle('hidenone')
+
+};
+
+
+const handlREN2 = () => {
+ 
+  const flera = document.querySelector(".head-table");
+  flera.innerHTML = renderTabe(dataface);
 
 };
 
@@ -1135,7 +1147,7 @@ const renderHeader2 = (id,obj) => {
   return `
   
   <header class="header row a-center j-between ">
-            <div class="item-left">
+            <div onclick='handlREN2()' class="item-left">
               <div class="row a-center">
                 <div class="icon-main">
                   <img class="color-icon" src="./img/DotsNine.svg" alt="9 chấm" />
@@ -1169,7 +1181,7 @@ const renderHeader2 = (id,obj) => {
                       <input id='b${id}' class='input-create' type='text' placeholder='Nhập tên folder' />
                       <div class='team-butn row a-center j-end'>
                       <div onclick='handlClickAdd1(event,${id})'  class='but-tn'>Không</div>
-                      <div onclick='hanldCkickAddMobie(event,${id})' class='but-tn'>Tạo mới</div>
+                      <div onclick='hanldCkickAddMobie(event,${id})' class='but-tn but-tn-1'>Tạo mới</div>
                       </div>
                       </div>
     
@@ -1234,24 +1246,6 @@ const handlClickMobie2 = (id) => {
 
 }
 
-
-
-let idding;
-const mobiClickHead = (id) => {
-  idding=id;
-  const allMobie = document.querySelectorAll('.tree-mobie-small');
-  const cardMobie = document.getElementById(`mobie${id}`)
-  allMobie.forEach(a=>a.style.backgroundColor='#FFFFFF');
-  cardMobie.style.backgroundColor='#f1f3ce'
-}
-
-const handlClickHome = () => {
-  const Elment = document.querySelector('.data-render');
-  const ElPmobie = document.querySelector('.text-mean-mobie');
-  Elment.innerHTML=renderMobieSmaill(dataface)
-  ElPmobie?.classList.toggle('d-none')
-}
-
 let RecenMobie=[];
 const handlOnfileMobie = (event,id) => {
   const casd = document.querySelector(".data-render");
@@ -1306,6 +1300,24 @@ const hanldCkickAddMobie = (event) =>{
     iputvl.value = "";
     acsc.classList.toggle("d-none");
   } else alert("Nhập ít nhất 3 ký tự");
+}
+
+
+
+let idding;
+const mobiClickHead = (id) => {
+  idding=id;
+  const allMobie = document.querySelectorAll('.tree-mobie-small');
+  const cardMobie = document.getElementById(`mobie${id}`)
+  allMobie.forEach(a=>a.style.backgroundColor='#FFFFFF');
+  cardMobie.style.backgroundColor='#f1f3ce'
+}
+
+const handlClickHome = () => {
+  const Elment = document.querySelector('.data-render');
+  const ElPmobie = document.querySelector('.text-mean-mobie');
+  Elment.innerHTML=renderMobieSmaill(dataface)
+  ElPmobie?.classList.toggle('d-none')
 }
 
 const handDeteMobie = (id) => {
