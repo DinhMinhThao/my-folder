@@ -5,17 +5,21 @@
     bottom: 0;
     width: 100%;
     text-align: center;
-    background-color: #0e2866;
+    background-color: #182c5a;
 }
 .form-text{
     color: white;
     margin-bottom: 40px;
+    margin-top: -40px;
 }
 .input-res{
     width: 350px;
     padding: 12px;
     outline: none;
     border-radius: 4px;
+}
+.text-head{
+    padding: 0 16px;
 }
 
 .btn {
@@ -41,7 +45,14 @@
     background-color: var(--primary-color);
     height: 100vh;
     padding: 0 16px;
+    top: 0;
+    z-index: 1;
 }
+#name-tree {
+    padding-right: 0;
+
+}
+
 .logo-login {
     font-size: 1rem;
     color: var(--secondary-text);
@@ -100,6 +111,7 @@
 
 /* Hear */
 .head-table {
+    margin-left:240px ;
     width: calc(100% - 240px);
 }
 .header {
@@ -202,6 +214,7 @@ label:hover {
 }
 .folder-item-2{
     padding: 8px;
+    border-bottom: .5px solid gray;
 }
 
 .items img{
@@ -220,19 +233,19 @@ label:hover {
     cursor: pointer;
 }
 
+.hover-item:hover {
+    background-color:#02283d;
+    color: #f1f3ce;
+}
 
-.folder-item:hover,
+
+
 .folder-item-2:hover {
     background-color: var(--hover-item-color);
 }
-.folder-item:hover .items p,
-.folder-item-2:hover .items p{
+
+.folder-item-2:hover p{
     color: var(--secondary-text);
-}
-.folder-item:hover .icon-tree img,
-.folder-item-2:hover .icon-tree img{
-    filter: invert(80%) sepia(32%) saturate(384%) hue-rotate(360deg)
-    brightness(104%) contrast(105%);
 }
 
 .table-right-item {
@@ -270,6 +283,7 @@ label:hover {
     bottom: 0;
     left: 0;
     width: 100%;
+    z-index: 1;
 }
 
 .form-add-items {
@@ -331,8 +345,193 @@ label:hover {
     transition: all .3s linear;
 }
 
+.tab-nav{
+    display: none;
+}
+
 .btn-upload-fike:hover {
     background-color: var(--secondary-color);
     color: var(--secondary-text);
     transform: scale(.9);
 }
+
+.list-action-dothree {
+    list-style: none;
+    background-color: #7d6969;
+    right: 20px;
+    top: 40px;
+    width: 120px;
+    border-radius: 4px;
+    text-align: start;
+    z-index: 1;
+}
+.list-action-dothree li {
+    padding: 8px 10px;
+}
+
+li:hover {
+    background-color: rgb(27, 30, 33);
+    cursor: pointer;
+}
+
+.icon-action-list:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+
+}
+.list-action-dothree li{
+    color: var(--primary-text);
+}
+.head-dot {
+    color: #0099F7;
+}
+
+.all-items{
+    width: 100%;
+}
+
+.all-file-recen{
+    flex-wrap: wrap;
+    text-align: center;
+}
+.img-recos{
+    width: 40px;
+    filter: invert(80%) sepia(32%) saturate(384%) hue-rotate(360deg)
+    brightness(104%) contrast(105%);
+    margin-bottom: 8px;
+}
+
+.acout-action img {
+    width: 50%;
+}
+
+.item-recen{
+    width: 100%;
+}
+
+.wid-item{
+    padding: 10px;
+}
+
+.all-file-recen {
+    margin-top: 10px;
+}
+
+.head-Recen {
+    margin: 10px 15px;
+}
+
+.NoneF {
+    width: 100%;
+    
+}
+
+.items-re{
+    font-size: .7rem;
+}
+.name-user-2{
+    padding: 8px 12px;
+    border: 1px solid var(--secondary-text);
+    border-radius: 4px;
+    color: var(--secondary-text);
+    font-size: .9rem;
+    cursor: pointer;
+}
+.nav-list-end{
+    margin-top: 10px;
+    display: none;
+}
+.name-user-2:hover{
+    background-color: var(--forcus-action-color);
+    transform: scale(.9);
+}
+
+.tree-mobie-small{
+    padding: 8px;
+}
+
+.mobie {
+    padding: 0 10px;
+    margin-top: 10px;
+    display: none;
+}
+
+.mobie p{
+    padding: 8px;
+    font-size: .8rem;
+}
+.img-in-mobie{
+    margin-left: 8px; 
+    margin-right: 8px;
+}
+.tree-mobie-small:hover {
+    background-color: var(--secondary-text);
+}
+
+
+
+
+@media (max-width:1024px) {
+    .nav-left {
+        display: none;
+        top: 0;
+        z-index: 1;
+        right:  0;
+    }
+    .head-table{
+        width: 100%;
+        margin-left: 0;
+    }
+    .tab-nav{
+        display: block;
+    }
+
+    .hidenone {
+        display: block;
+    }
+}
+
+@media (max-width:720px){
+    .text-main-text,
+    .upload-text{
+        display: none;
+    }
+    .nav-list-end{
+        display: flex;
+    }
+    .wid-item {
+        width: 25%;;
+    }
+
+}
+
+
+@media (max-width:480px){
+    html {
+        font-size: .8rem;
+    }
+    .tree-table{
+        display: none;
+    }
+    .tree-table-right{
+        display: none;
+    }
+    .form-add{
+        top: 45vh;
+    }
+    .wid-item {
+        width: 50%;;
+    }
+    .btnHome:hover{
+        font-weight: 600;
+        transition: all .3s linear;
+        cursor: pointer;
+    }
+    .text-mean-mobie {
+        color: gray;
+    }
+    .mobie {
+        display: block;
+    }
+}
+
