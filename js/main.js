@@ -859,7 +859,8 @@ const handlRename = (id) => {
   const ElFormRename = document.getElementById(`rename${id}`);
   const teds = document.getElementById(`text${id}`);
   ElFormRename.classList.toggle("d-none");
-  teds.classList.toggle("d-none");
+  teds.classList.toggle("d-block");
+
 };
 
 const handlSubmitShare2 = (event,id) => {
