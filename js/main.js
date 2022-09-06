@@ -14,12 +14,14 @@ const data = [
     url: "./img/Vector.svg",
     img: "",
     name: "Doccument",
+    share: "",
     chinden: [
       {
         id: 2,
         url: "./img/Vector.svg",
         img: "",
         name: "Setup",
+        share: "",
         chinden: [],
       },
       {
@@ -27,18 +29,21 @@ const data = [
         url: "./img/Vector.svg",
         img: "",
         name: "Tài liệu",
+        share: "",
         chinden: [
           {
             id: 4,
             url: "./img/Vector.svg",
             img: "",
             name: "Tài liệu mật",
+            share: "",
             chinden: [
               {
                 id: 5,
                 url: "./img/DOC.svg",
                 img: "",
                 name: "Hướng đẫn tán gái để lấy làm vợ.doc",
+                share: "",
                 chinden: null,
               },
               {
@@ -46,6 +51,7 @@ const data = [
                 url: "./img/DOC.svg",
                 img: "",
                 name: "Hướng đẫn xấu trai vẫn lấy được vợ.doc",
+                share: "",
                 chinden: null,
               },
             ],
@@ -55,6 +61,7 @@ const data = [
             url: "./img/DOC.svg",
             img: "",
             name: "Bài tập của tôi.doc",
+            share: "",
             chinden: null,
           },
           {
@@ -62,6 +69,7 @@ const data = [
             url: "./img/DOC.svg",
             img: "",
             name: "Làm đề án.doc",
+            share: "",
             chinden: null,
           },
         ],
@@ -71,33 +79,38 @@ const data = [
         url: "./img/Vector.svg",
         img: "",
         name: "Ảnh của tôi",
+        share: "",
         chinden: [
           {
             id: 10,
             url: "./img/JPG.svg",
-            img: "./img/crush.svg",
+            img: "./img/crush.png",
             name: "Ảnh crush mặc đẹp.jpg",
+            share: "",
             chinden: null,
           },
           {
             id: 11,
             url: "./img/JPG.svg",
-            img: "./img/crush3.svg",
+            img: "./img/crush3.png",
             name: "Ảnh crush.jpg",
+            share: "",
             chinden: null,
           },
           {
             id: 12,
             url: "./img/JPG.svg",
-            img: "./img/crush2.svg",
+            img: "./img/crush2.jpeg",
             name: "Được ôm crush.jpg",
+            share: "",
             chinden: null,
           },
           {
             id: 13,
             url: "./img/JPG.svg",
-            img: "./img/crush1.svg",
+            img: "./img/crush1.jpeg",
             name: "Ảnh crush cười.jpg",
+            share: "",
             chinden: null,
           },
         ],
@@ -109,6 +122,7 @@ const data = [
     url: "./img/Vector.svg",
     img: "",
     name: "Doccument 1",
+    share: "",
     chinden: [],
   },
   {
@@ -116,6 +130,7 @@ const data = [
     url: "./img/Vector.svg",
     img: "",
     name: "Doccument 2",
+    share: "",
     chinden: [],
   },
   {
@@ -123,6 +138,7 @@ const data = [
     url: "./img/Vector.svg",
     img: "",
     name: "Doccument 3",
+    share: "",
     chinden: [],
   },
 ];
@@ -132,6 +148,8 @@ const flatDara = dsaf.flatMap((a) => [a, ...a.chinden]);
 const flatData = [...flatDara, ...flatDara[6].chinden];
 let delData = [];
 let RecenData = [];
+let RecenMobie = [];
+let ShareData = [];
 
 const EMAIL = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 const App = document.getElementById("project");
@@ -210,7 +228,7 @@ const renderdata = () => {
               <p  class="name-user">Gần đây</p>
             </div>
           </div>
-          <div class="row a-center nav-list">
+          <div onclick='handlShare()' class="row a-center nav-list">
             <div class="col-2">
               <img class="color-icon" src="./img/Users.svg" alt="" />
             </div>
@@ -259,8 +277,8 @@ const renderdata = () => {
 };
 
 const handlLogout = () => {
-  renderForm()
-}
+  renderForm();
+};
 
 const renderTabe = (obj) => {
   return `
@@ -338,7 +356,7 @@ const header = () => {
           <div class="row a-center">
               <input onchange='handlOnfile(event)' class='d-none' type='file' id='file' name='file'/>
               <label for='file' class="upload row a-center">
-                <img class="color-icon" src="./img/ArrowLineUp.svg" alt="upload" />
+                <img class="color-icon icon-upload" src="./img/ArrowLineUp.svg" alt="upload" />
                 <p class="upload-text">Upload</p>
               </label>
             <button onclick='handleClickShow()'>
@@ -377,6 +395,7 @@ const header = () => {
           <button onclick='handlClickFilter()' class='btn-header-input p-absolute'>Tìm kiếm
           </button>
        </div>
+
       </header>
   `;
 };
@@ -399,14 +418,12 @@ const handlClickFilter = () => {
   const find = flatData.filter((a) =>
     a.name.toLocaleLowerCase().includes(sear().toLocaleLowerCase())
   );
-  const Elment = document.querySelector('.data-render');
-  Elment.innerHTML = renderMobieSmaill(find)
+  const Elment = document.querySelector(".data-render");
+  Elment.innerHTML = renderMobieSmaill(find);
   asc.innerHTML = renderFolderFilter(find);
-  document.querySelector(".center-header").classList.toggle("d-none");
   nameLink.style.display = "none";
   nameLink1.style.display = "none";
   nameLink2.style.display = "none";
-
 };
 
 const [fileo, fileoSet] = simpleStatuts("");
@@ -424,6 +441,7 @@ const handlOnfile = (event) => {
   };
   flatData.push(newonj);
   RecenData.push(newonj);
+  RecenMobie.push(newonj);
   let na = newonj.name.slice(newonj.name.indexOf(".") + 1).toLocaleLowerCase();
   if (
     na === "jpeg" ||
@@ -442,7 +460,7 @@ const handlOnfile = (event) => {
   }
 
   casd.innerHTML = renderFolder(adfads);
-  casd2.innerHTML=renderMobieSmaill(dataface)
+  casd2.innerHTML = renderMobieSmaill(dataface);
 };
 
 let adfads;
@@ -461,7 +479,7 @@ const renderFolder = (obj) => {
                 <p  >${a.name}</p>
             </div>
             <div class='icon-tree'>
-                <img class='color-icon' src='./img/CaretRight.svg'/>
+                <img class='' src='./img/CaretRight.svg'/>
             </div>
             </div>
 
@@ -489,17 +507,19 @@ const renderFolderbig = (obj) => {
                 <p onclick='handlC2(${a.id})' >${a.name}</p>
             </div>
             <div class='icon-tree '>
-                <img onclick='handlClickLis(${a.id})' class='color-icon icon-action-list' src='./img/DotsThreeVertical.svg'/>
+                <img onclick='handlClickLis(${a.id})' class=' icon-action-list' src='./img/DotsThreeVertical.svg'/>
 
             </div>
         </div>
         <ul id='text${a.id}' class='list-action-dothree p-absolute d-none'>
           <li class='head-dot row j-center'>${a.name}</li>
           <li>Tải xuống</li>
-          <li>Đổi tên</li>
+          <li onclick='handlRename(${a.id})' >Đổi tên</li>
+          <li onclick = 'handlShareCl(${a.id})'>Chia sẻ</li>
           <li>Di chuyển tới</li>
           <li onclick='handlDetele1()'>Xóa</li>
         </ul>
+
         </div>
         `
     )
@@ -518,7 +538,7 @@ const renderFolderFilter = (obj) => {
                 <p onclick='handlClickSearh(${a.id})' >${a.name}</p>
             </div>
             <div class='icon-tree'>
-                <img class='color-icon' src='./img/DotsThreeVertical.svg'/>
+                <img class='' src='./img/DotsThreeVertical.svg'/>
             </div>
 
      </div>
@@ -546,12 +566,10 @@ const handlClickFolder = (id) => {
     (a) =>
       (a.style.cssText = `
   background-color:#FFFFFF;
-  color:#000b11;
   `)
   );
   fdca.style.cssText = `
-  background-color:#02283d;
-  color:#f1f3ce;
+  background-color:#f1f3ce;
   `;
 
   const arr = adfads.find((a) => {
@@ -563,7 +581,7 @@ const handlClickFolder = (id) => {
   nameLink1.style.display = "none";
   nameLink2.style.display = "none";
   if (arr.chinden === null) {
-    console.log("khong co thu muc");
+    asc.innerHTML = renderDetail(arr)
   } else if (arr.chinden.length === 0) asc.innerHTML = "Thư mục này trống";
   else {
     asc.innerHTML = renderFolderbig(arr.chinden);
@@ -594,7 +612,7 @@ const handlC2 = (id) => {
     <img src='./img/CaretRight.svg'> ${fixName1()}</p>`;
   nameLink2.style.display = "none";
   if (arr2.chinden === null) {
-    console.log("khong co thu muc");
+    asc.innerHTML = renderDetail(arr2)
   } else if (arr2.chinden.length === 0) asc.innerHTML = "Thư mục này trống";
   else {
     asc.innerHTML = arr2.chinden
@@ -607,17 +625,19 @@ const handlC2 = (id) => {
                         <p  onclick='handlC23(${a.id})'>${a.name}</p>
                     </div>
                     <div class='icon-tree '>
-                    <img onclick='handlClickLis(${a.id})' class='color-icon icon-action-list' src='./img/DotsThreeVertical.svg'/>
+                    <img onclick='handlClickLis(${a.id})' class=' icon-action-list' src='./img/DotsThreeVertical.svg'/>
     
                 </div>
             </div>
             <ul id='text${a.id}' class='list-action-dothree p-absolute d-none'>
               <li class='head-dot row j-center'>${a.name}</li>
               <li>Tải xuống</li>
-              <li>Đổi tên</li>
+              <li onclick='handlRename(${a.id})'>Đổi tên</li>
+              <li onclick = 'handlShareCl(${a.id})'>Chia sẻ</li>
               <li>Di chuyển tới</li>
               <li onclick='handlDetele1()'>Xóa</li>
             </ul>
+
             </div>
                 `;
       })
@@ -638,7 +658,7 @@ const hanldCkickAddtree = (event) => {
   const iputvl = document.querySelector(".input-create");
   const redr = document.querySelector(".render-data");
   const acsc = document.querySelector(".form-add");
-  const red2s = document.querySelector('.data-render')
+  const red2s = document.querySelector(".data-render");
 
   const myobj = {
     id: 19 + adfads.length,
@@ -649,10 +669,11 @@ const hanldCkickAddtree = (event) => {
   };
   flatData.push(myobj);
   RecenData.push(myobj);
+  RecenMobie.push(myobj);
   if (myobj.name.length > 2) {
     adfads.push(myobj);
     redr.innerHTML = renderFolder(adfads);
-    red2s.innerHTML = renderMobieSmaill(adfads)
+    red2s.innerHTML = renderMobieSmaill(adfads);
     iputvl.value = "";
     acsc.classList.toggle("d-none");
   } else alert("Nhập ít nhất 3 ký tự");
@@ -677,7 +698,7 @@ const handlC23 = (id) => {
 <img src='./img/CaretRight.svg'>
 ${fixName2()}</p>`;
   if (arr2.chinden === null) {
-    console.log("khong co muc");
+    asc.innerHTML = renderDetail(arr2)
   } else if (arr2.chinden.length === 0)
     asc.innerHTML = `<p style="padding: 10px;">Thư mục này trống</p>`;
   else {
@@ -691,17 +712,19 @@ ${fixName2()}</p>`;
                         <p  onclick='handlC234(${a.id})' >${a.name}</p>
                     </div>
                     <div class='icon-tree '>
-                    <img onclick='handlClickLis(${a.id})' class='color-icon icon-action-list' src='./img/DotsThreeVertical.svg'/>
+                    <img onclick='handlClickLis(${a.id})' class='icon-action-list' src='./img/DotsThreeVertical.svg'/>
     
                 </div>
             </div>
             <ul id='text${a.id}' class='list-action-dothree p-absolute d-none'>
               <li class='head-dot row j-center'>${a.name}</li>
               <li>Tải xuống</li>
-              <li>Đổi tên</li>
+              <li onclick='handlRename(${a.id})'>Đổi tên</li>
+              <li onclick = 'handlShareCl(${a.id})'>Chia sẻ</li>
               <li>Di chuyển tới</li>
               <li onclick='handlDetele1()'>Xóa</li>
             </ul>
+
             </div>
                 `
       )
@@ -724,7 +747,7 @@ const handlClickSearh = (id) => {
   headed.innerHTML = renderHeader(id);
   const arr4 = flatData.find((a) => a.id === id);
   if (arr4.chinden === null) {
-    console.log("khong co muc");
+    asc.innerHTML = renderDetail(arr4)
   } else if (arr4.chinden.length === 0)
     asc.innerHTML = `<p style="padding: 10px;">Thư mục này trống</p>`;
   else {
@@ -737,7 +760,7 @@ const handlClickSearh = (id) => {
                         <p onclick='handlC234(${a.id})' >${a.name}</p>
                     </div>
                     <div class='icon-tree'>
-                        <img class='color-icon' src='./img/DotsThreeVertical.svg'/>
+                        <img class='' src='./img/DotsThreeVertical.svg'/>
                     </div>
              </div>
         
@@ -768,9 +791,13 @@ const renderHeader = (id, obj) => {
               <div class="row a-center">
                   <input onchange='handlOnfile1(event)' class='d-none' type='file' id='file' name='file'/>
                   <label for='file' class="upload row a-center">
-                    <img class="color-icon" src="./img/ArrowLineUp.svg" alt="upload" />
+                    <img class="color-icon icon-upload" src="./img/ArrowLineUp.svg" alt="upload" />
                     <p class="upload-text">Upload</p>
                   </label>
+                  <button class='row a-center'>
+                  <img class='color-icon icon-upload' src="./img/ArrowLineDown.svg" alt="Soi" />
+                  <p class='upload-text down-load'>Download</p>
+                </button>
                 <button onclick='handleClickShow()' >
                   <img class='color-icon lager' src="./img/MagnifyingGlass.svg" alt="Soi" />
                 </button>
@@ -806,13 +833,55 @@ const renderHeader = (id, obj) => {
             <input onchange='handlChane(event)' class="input-header p-relative" type="text" placeholder="Tìm kiếm mọi thứ" />
             <button onclick='handlClickFilter()' class='btn-header-input p-absolute'>Tìm kiếm</button>
            </div>
-           
+           <div id='rename${id}' class='rename row a-center j-center p-absolute j-center d-none'>
+           <form onsubmit='handlSubmitbtn(event,${id})' class='form-rename'>
+           <p class='text-rename'>Nhập tên vào đây</p>
+           <input class='input-rename' type='text' placeholder='Nhập tên mới' />
+           <button type='submit' class='but-rename'>Thay đổi</button>
+           </form>
+        </div>
+
+        <div id='share${id}' class='rename row a-center j-center p-absolute j-center d-none'>
+        <form onsubmit='handlSubmitShare2(event,${id})' class='form-rename'>
+        <p class='text-rename'>Chia sẻ cho email:</p>
+        <input class='input-share' type='text' placeholder='Nhập email' />
+        <button type='submit' class='but-rename'>Share</button>
+        </form>
+
           </header>
   `;
 };
 const handlClickAdd1 = (event, id) => {
   const acsc = document.getElementById(`a${id}`);
   acsc.classList.toggle("d-none");
+};
+const handlRename = (id) => {
+  const ElFormRename = document.getElementById(`rename${id}`);
+  const teds = document.getElementById(`text${id}`);
+  ElFormRename.classList.toggle("d-none");
+  teds.classList.toggle("d-none");
+};
+
+const handlSubmitShare2 = (event,id) => {
+  event.preventDefault();
+  const ElFormRename = document.getElementById(`share${id}`);
+  ElFormRename.classList.toggle("d-none");
+  const EliputShare = document.querySelector(".input-share");
+  const itemis = csdcc.find((a) => a.id === id);
+  const newnames = {
+    ...itemis,
+    share: EliputShare.value === "" ? itemis.share : EliputShare.value,
+  };
+  if (newnames.share !== "") {
+    ShareData.push(newnames);
+  }
+}
+
+const handlSubmitbtn = (event, id) => {
+  event.preventDefault();
+  const ElFormRename = document.getElementById(`rename${id}`);
+  ElFormRename.classList.toggle("d-none");
+  const Elinput = document.querySelector(".input-rename");
 };
 
 const hanldCkickAddtree1 = (event, id) => {
@@ -902,7 +971,6 @@ const handlDetele1 = () => {
   }
 
   redr1.innerHTML = renderFolderbig(redel1);
-
 };
 
 const hover = (id) => {
@@ -917,12 +985,10 @@ const coloset = (id) => {
 
   fixBg()
     ? (colorEl.style.cssText = `
-background-color:#02283d;
-color:#f1f3ce;
+background-color:#f1f3ce;
 `)
     : (colorEl.style.cssText = `
 background-color:#FAFAFA;
-color:#000b11;
 `);
 };
 
@@ -934,12 +1000,12 @@ const coloset1 = (id) => {
 
   fixBg1()
     ? (colorEl.style.cssText = `
-background-color:#02283d;
-color:#f1f3ce;
+background-color:#f1f3ce;
+
 `)
     : (colorEl.style.cssText = `
 background-color:#FAFAFA;
-color:#000b11;
+
 `);
 };
 
@@ -951,12 +1017,12 @@ const coloset2 = (id) => {
 
   fixBg2()
     ? (colorEl.style.cssText = `
-background-color:#02283d;
-color:#f1f3ce;
+background-color:#f1f3ce;
+
 `)
     : (colorEl.style.cssText = `
 background-color:#FAFAFA;
-color:#000b11;
+
 `);
 };
 
@@ -968,18 +1034,20 @@ const coloset3 = (id) => {
 
   fixBg3()
     ? (colorEl.style.cssText = `
-background-color:#02283d;
-color:#f1f3ce;
+background-color:#f1f3ce;
+
 `)
     : (colorEl.style.cssText = `
 background-color:#FAFAFA;
-color:#000b11;
+
 `);
 };
 
 const handlClickLis = (id) => {
   const shows = document.getElementById(`text${id}`);
   shows.classList.toggle("d-block");
+  const headed = document.querySelector(".header-hese");
+  headed.innerHTML = renderHeader(id);
 };
 window.onclick = function (event) {
   if (!event.target.matches(".icon-action-list")) {
@@ -993,12 +1061,51 @@ window.onclick = function (event) {
     }
   }
 };
+// Share
+const handlShare = () => {
+  const redr = document.querySelector(".data-render");
+  const TextEl = document.querySelector(".head-text-mobie");
+
+  const redbde = document.querySelector(".tree-table");
+  redbde.innerHTML = `
+    <div class='item-recen'>
+    <p class='head-Recen row'>Bạn đã chia sẻ các file:</p>
+    <div class='row all-file-recen'>
+          ${
+            ShareData.length === 0
+              ? `<div class='NoneF row a-center j-center'><p>Không có file nào được chia sẻ</p></div>`
+              : ShareData.map(
+                  (a) => `
+
+              <div class='col-2 wid-item'>
+                <div class='items-re'>
+                  <img class='img-recos' src='${a.url}'/>
+                  <p>${
+                    a.name.length < 12 ? a.name : a.name.slice(0, 11) + "..."
+                  }</p>
+                </div>
+              </div>
+          `
+                )
+                  .join(",")
+                  .replaceAll(/,/g, "")
+          }
+        </div>
+    </div>
+  `;
+  ShareData.length === 0
+    ? (redr.innerHTML = `<p>Thư mục trống</p>`)
+    : (redr.innerHTML = renderMobieSmaill(ShareData));
+  TextEl.innerHTML = `<p>File và Folder đã được chia sẻ</p>`;
+  const navbar = document.querySelector(".nav-left");
+  navbar.classList.toggle("hidenone");
+};
 
 // Recos
 
 const handlRecos = () => {
   const redr = document.querySelector(".data-render");
-  const TextEl = document.querySelector('.head-text-mobie')
+  const TextEl = document.querySelector(".head-text-mobie");
 
   const redbde = document.querySelector(".tree-table");
   redbde.innerHTML = `
@@ -1014,27 +1121,30 @@ const handlRecos = () => {
               <div class='col-2 wid-item'>
                 <div class='items-re'>
                   <img class='img-recos' src='${a.url}'/>
-                  <p>${a.name.length < 12?a.name:a.name.slice(0,11)+'...'}</p>
+                  <p>${
+                    a.name.length < 12 ? a.name : a.name.slice(0, 11) + "..."
+                  }</p>
                 </div>
               </div>
           `
-                ).join(",")
-                .replaceAll(/,/g, "")
+                )
+                  .join(",")
+                  .replaceAll(/,/g, "")
           }
         </div>
     </div>
   `;
-  RecenMobie.length===0?redr.innerHTML=`<p>Thư mục trống</p>`: 
-  redr.innerHTML = renderMobieSmaill(RecenMobie);
-  TextEl.innerHTML=`<p>File và Folder đã thêm gần đây</p>`
-  const navbar = document.querySelector(".nav-left")
-  navbar.classList.toggle('hidenone')
-
+  RecenMobie.length === 0
+    ? (redr.innerHTML = `<p>Thư mục trống</p>`)
+    : (redr.innerHTML = renderMobieSmaill(RecenMobie));
+  TextEl.innerHTML = `<p>File và Folder đã thêm gần đây</p>`;
+  const navbar = document.querySelector(".nav-left");
+  navbar.classList.toggle("hidenone");
 };
 
 const handlShowDele = () => {
   const redr = document.querySelector(".data-render");
-  const TextEl = document.querySelector('.head-text-mobie')
+  const TextEl = document.querySelector(".head-text-mobie");
 
   const redbde = document.querySelector(".tree-table");
   redbde.innerHTML = `
@@ -1044,106 +1154,126 @@ const handlShowDele = () => {
           ${
             delData.length === 0
               ? `<div class='NoneF row a-center j-center'><p>Gần đây bạn không xóa file nào</p></div>`
-              : delData.map(
-                  (a) => `
+              : delData
+                  .map(
+                    (a) => `
 
               <div class='col-2 wid-item'>
                 <div class='items-re'>
                   <img class='img-recos' src='${a.url}'/>
-                  <p>${a.name.length < 12?a.name:a.name.slice(0,11)+'...'}</p>
+                  <p>${
+                    a.name.length < 12 ? a.name : a.name.slice(0, 11) + "..."
+                  }</p>
                 </div>
               </div>
           `
-                ).join(",")
-                .replaceAll(/,/g, "")
+                  )
+                  .join(",")
+                  .replaceAll(/,/g, "")
           }
         </div>
     </div>
   `;
-    delData.length===0?redr.innerHTML=`<p>Thư mục trống</p>`: redr.innerHTML = renderMobieSmaill(delData);
+  delData.length === 0
+    ? (redr.innerHTML = `<p>Thư mục trống</p>`)
+    : (redr.innerHTML = renderMobieSmaill(delData));
 
-  TextEl.innerHTML=`<p>File và Folder đã xóa</p>`
-  const navbar = document.querySelector(".nav-left")
-  navbar.classList.toggle('hidenone')
-
-}
-
-
-const handlREN = () => {
- 
-
-  const flera = document.querySelector(".head-table");
-  flera.innerHTML = renderTabe(adfads);
-  const navbar = document.querySelector(".nav-left")
-  navbar.classList.toggle('hidenone')
-
+  TextEl.innerHTML = `<p>File và Folder đã xóa</p>`;
+  const navbar = document.querySelector(".nav-left");
+  navbar.classList.toggle("hidenone");
 };
 
+const handlREN = () => {
+  const flera = document.querySelector(".head-table");
+  flera.innerHTML = renderTabe(adfads);
+  const navbar = document.querySelector(".nav-left");
+  navbar.classList.toggle("hidenone");
+};
 
 const handlREN2 = () => {
- 
   const flera = document.querySelector(".head-table");
   flera.innerHTML = renderTabe(dataface);
-
 };
 
 const showNav = () => {
-  const navbar = document.querySelector(".nav-left")
-  navbar.classList.toggle('hidenone')
-}
+  const navbar = document.querySelector(".nav-left");
+  navbar.classList.toggle("hidenone");
+};
 
 const handlClose = () => {
-  const navbar = document.querySelector(".nav-left")
-  navbar.classList.toggle('hidenone')
-}
-
-
+  const navbar = document.querySelector(".nav-left");
+  navbar.classList.toggle("hidenone");
+};
 
 //// mobile
-let dataface=[];
-const renderMobie = (obj) =>{
-  dataface=obj;
-  let redut = '';
+let dataface = [];
+const renderMobie = (obj) => {
+  dataface = obj;
+  let redut = "";
 
-  return redut+=[...obj].map(a=>`
-  <div id='mobie${a.id}' onclick='mobiClickHead(${a.id})' class='tree-mobie-small row j-between a-center'>
+  return (redut += [...obj]
+    .map(
+      (a) => `
+  <div id='mobie${a.id}' onclick='mobiClickHead(${a.id})' class='tree-mobie-small row j-between a-center p-relative'>
       <div class='row a-center items'>
           <img class='color-icon' src='${a.url}'/>
           <p onclick='handlClickMobie(${a.id})' >${a.name}</p>
       </div>
       <div class='icon-t-mobie'>
-          <img class='' src='./img/DotsThreeVertical.svg'/>
+          <img onclick='handlClickLis2(${a.id})' class='' src='./img/DotsThreeVertical.svg'/>
       </div>
+      <ul id='text2${a.id}' class='list-action-dothree p-absolute d-none'>
+      <li class='head-dot row j-center'>${a.name}</li>
+      <li>Tải xuống</li>
+      <li onclick='handlRename2(${a.id})'>Đổi tên</li>
+      <li onclick = 'handlShareCl(${a.id})' >Chia sẻ</li>
+      <li>Di chuyển tới</li>
+      <li onclick='handDeteMobie(${a.id})'>Xóa</li>
+    </ul>
 
   </div>
-  `).join(",")
-  .replaceAll(/,/g, "")
-} 
+  `
+    )
+    .join(",")
+    .replaceAll(/,/g, ""));
+};
 
 let arrayMobi;
-const renderMobieSmaill = (obj) =>{
-  arrayMobi=obj;
+const renderMobieSmaill = (obj) => {
+  arrayMobi = obj;
 
-  let redut = '';
+  let redut = "";
 
-  return redut+=[...obj].map(a=>`
-  <div id='mobie${a.id}' onclick='mobiClickHead(${a.id})' class='tree-mobie-small row j-between a-center'>
+  return (redut += [...obj]
+    .map(
+      (a) => `
+  <div id='mobie${a.id}' onclick='mobiClickHead(${a.id})' class='tree-mobie-small row j-between a-center p-relative'>
       <div class='row a-center items items-mobie'>
           <img class='color-icon' src='${a.url}'/>
           <p onclick='handlClickMobie2(${a.id})' >${a.name}</p>
+          <p id='share-name${a.id}' class=''> /${a.share===''? 'Riêng tư':a.share}</p>
       </div>
       <div class='icon-t-mobie'>
-          <img class='' src='./img/DotsThreeVertical.svg'/>
+          <img onclick='handlClickLis2(${a.id})' class='' src='./img/DotsThreeVertical.svg'/>
       </div>
+      <ul id='text2${a.id}' class='list-action-dothree p-absolute d-none'>
+      <li class='head-dot row j-center'>${a.name}</li>
+      <li>Tải xuống</li>
+      <li onclick='handlRename2(${a.id})'>Đổi tên</li>
+      <li onclick = 'handlShareCl(${a.id})'>Chia sẻ</li>
+      <li>Di chuyển tới</li>
+      <li onclick='handDeteMobie(${a.id})'>Xóa</li>
+    </ul>
 
   </div>
-  `).join(",")
-  .replaceAll(/,/g, "")
-
-}
+  `
+    )
+    .join(",")
+    .replaceAll(/,/g, ""));
+};
 let dataFilll;
-const renderHeader2 = (id,obj) => {
-  dataFilll=obj;
+const renderHeader2 = (id, obj) => {
+  dataFilll = obj;
   return `
   
   <header class="header row a-center j-between ">
@@ -1161,9 +1291,13 @@ const renderHeader2 = (id,obj) => {
               <div class="row a-center">
                   <input onchange='handlOnfileMobie(event,${id})' class='d-none' type='file' id='file' name='file'/>
                   <label for='file' class="upload row a-center">
-                    <img class="color-icon" src="./img/ArrowLineUp.svg" alt="upload" />
+                    <img class="color-icon icon-upload" src="./img/ArrowLineUp.svg" alt="upload" />
                     <p class="upload-text">Upload</p>
                   </label>
+                  <button class='row a-center'>
+                  <img class='color-icon icon-upload' src="./img/ArrowLineDown.svg" alt="Soi" />
+                  <p class='upload-text down-load'>Download</p>
+                </button>
                 <button onclick='handleClickShow()' >
                   <img class='color-icon lager' src="./img/MagnifyingGlass.svg" alt="Soi" />
                 </button>
@@ -1199,55 +1333,66 @@ const renderHeader2 = (id,obj) => {
             <input onchange='handlChane(event)' class="input-header p-relative" type="text" placeholder="Tìm kiếm mọi thứ" />
             <button onclick='handlClickFilter()' class='btn-header-input p-absolute'>Tìm kiếm</button>
            </div>
+
+           <div id='rename2${id}' class='rename row a-center j-center p-absolute j-center d-none'>
+           <form onsubmit='handlSubmitbtn2(event,${id})' class='form-rename'>
+           <p class='text-rename'>Nhập tên vào đây</p>
+           <input class='input-rename' type='text' placeholder='Nhập tên mới' />
+           <button type='submit' class='but-rename'>Thay đổi</button>
+           </form>
+          </div>
+
+           <div id='share${id}' class='rename row a-center j-center p-absolute j-center d-none'>
+           <form onsubmit='handlSubmitShare(event,${id})' class='form-rename'>
+           <p class='text-rename'>Chia sẻ cho email:</p>
+           <input class='input-share' type='text' placeholder='Nhập email' />
+           <button type='submit' class='but-rename'>Share</button>
+           </form>
            
+        </div>
+
           </header>
   `;
 };
 const handlClickMobie = (id) => {
-  const Elment = document.querySelector('.data-render');
-  const newdat = [...dataface].find(a=>a.id===id);
-  const camback = document.querySelector('.comback');
+  const Elment = document.querySelector(".data-render");
+  const newdat = [...dataface].find((a) => a.id === id);
+  const camback = document.querySelector(".comback");
   const headed = document.querySelector(".header-hese");
 
-  camback.innerHTML=`<p class='text-mean-mobie' >/ ${newdat.name}</p>`;
+  camback.innerHTML = `<p class='text-mean-mobie' >/ ${newdat.name}</p>`;
 
- 
+  if (newdat.chinden === null) {
+    Elment.innerHTML=renderDetail(newdat)
 
-  if (newdat.chinden===null){
-    console.log('null')
+  } else if (newdat.chinden.length === 0) {
+    Elment.innerHTML = `<p >Thư mục này trống</p>`;
+    headed.innerHTML = renderHeader2(id, newdat.chinden);
+  } else {
+    Elment.innerHTML = renderMobieSmaill(newdat.chinden);
+    headed.innerHTML = renderHeader2(id, newdat.chinden);
   }
-  else if (newdat.chinden.length===0) {
-    Elment.innerHTML=`<p >Thư mục này trống</p>`;
-    headed.innerHTML = renderHeader2(id,newdat.chinden);
-  } else {Elment.innerHTML = renderMobieSmaill(newdat.chinden);
-    headed.innerHTML = renderHeader2(id,newdat.chinden);
-  }
-
-}
-
+};
 
 const handlClickMobie2 = (id) => {
-
-  const camback = document.querySelector('.comback');
-  const Elment = document.querySelector('.data-render');
-  const newdat = [...arrayMobi].find(a=>a.id===id);
+  const camback = document.querySelector(".comback");
+  const Elment = document.querySelector(".data-render");
+  const newdat = [...arrayMobi].find((a) => a.id === id);
 
   const headed = document.querySelector(".header-hese");
-  camback.innerHTML=`<p class='text-mean-mobie' >/ ${newdat.name}</p>`;
-  if (newdat.chinden===null){
-    return console.log('null')
+  camback.innerHTML = `<p class='text-mean-mobie' >/ ${newdat.name}</p>`;
+  if (newdat.chinden === null) {
+    Elment.innerHTML=renderDetail(newdat)
+  } else if (newdat.chinden.length === 0) {
+    Elment.innerHTML = `<p>Thư mục này trống</p>`;
+    headed.innerHTML = renderHeader2(id, newdat.chinden);
+  } else {
+    Elment.innerHTML = renderMobieSmaill(newdat.chinden);
+    headed.innerHTML = renderHeader2(id, newdat.chinden);
   }
-  else if (newdat.chinden.length===0) {
-    Elment.innerHTML=`<p>Thư mục này trống</p>`;
-    headed.innerHTML = renderHeader2(id,newdat.chinden);
-  } else {Elment.innerHTML = renderMobieSmaill(newdat.chinden);
-    headed.innerHTML = renderHeader2(id,newdat.chinden);
-  }
+};
 
-}
-
-let RecenMobie=[];
-const handlOnfileMobie = (event,id) => {
+const handlOnfileMobie = (event, id) => {
   const casd = document.querySelector(".data-render");
   fileoSet(event.target.files[0].name);
   const newonj = {
@@ -1279,7 +1424,7 @@ const handlOnfileMobie = (event,id) => {
   casd.innerHTML = renderMobieSmaill(dataFilll);
 };
 
-const hanldCkickAddMobie = (event) =>{
+const hanldCkickAddMobie = (event) => {
   event.preventDefault();
   const iputvl = document.querySelector(".input-create");
   const redr = document.querySelector(".data-render");
@@ -1300,39 +1445,100 @@ const hanldCkickAddMobie = (event) =>{
     iputvl.value = "";
     acsc.classList.toggle("d-none");
   } else alert("Nhập ít nhất 3 ký tự");
-}
-
-
+};
 
 let idding;
 const mobiClickHead = (id) => {
-  idding=id;
-  const allMobie = document.querySelectorAll('.tree-mobie-small');
-  const cardMobie = document.getElementById(`mobie${id}`)
-  allMobie.forEach(a=>a.style.backgroundColor='#FFFFFF');
-  cardMobie.style.backgroundColor='#f1f3ce'
-}
+  idding = id;
+  const allMobie = document.querySelectorAll(".tree-mobie-small");
+  const cardMobie = document.getElementById(`mobie${id}`);
+  allMobie.forEach((a) => (a.style.backgroundColor = "#FFFFFF"));
+  cardMobie.style.backgroundColor = "#f1f3ce";
+};
 
 const handlClickHome = () => {
-  const Elment = document.querySelector('.data-render');
-  const ElPmobie = document.querySelector('.text-mean-mobie');
-  Elment.innerHTML=renderMobieSmaill(dataface)
-  ElPmobie?.classList.toggle('d-none')
-}
+  const Elment = document.querySelector(".data-render");
+  const ElPmobie = document.querySelector(".text-mean-mobie");
+  Elment.innerHTML = renderMobieSmaill(dataface);
+  ElPmobie?.classList.toggle("d-none");
+};
 
 const handDeteMobie = (id) => {
-const redr = document.querySelector(".data-render");
-const delte = arrayMobi.find(a=>a.id === idding)
-arrayMobi.splice(arrayMobi.indexOf(delte),1)
+  const redr = document.querySelector(".data-render");
+  const delte = arrayMobi.find((a) => a.id === idding);
+  arrayMobi.splice(arrayMobi.indexOf(delte), 1);
+
+  if (delte !== undefined) {
+    delData.push(delte);
+  } else {
+    console.log("khong co gia tri");
+  }
+  redr.innerHTML = renderMobieSmaill(arrayMobi);
+};
+
+const handlClickLis2 = (id) => {
+  const headed = document.querySelector(".header-hese");
+  headed.innerHTML = renderHeader2(id, arrayMobi);
+  const shows = document.getElementById(`text2${id}`);
+  shows.classList.toggle("d-none");
+};
+
+const handlRename2 = (id) => {
+  const ElFormRename = document.getElementById(`rename2${id}`);
+  const teds = document.getElementById(`text2${id}`);
+  ElFormRename.classList.toggle("d-none");
+  teds.classList.toggle("d-none");
+};
+
+const handlSubmitbtn2 = (event, id) => {
+  event.preventDefault();
+  const ElFormRename = document.getElementById(`rename2${id}`);
+  ElFormRename.classList.toggle("d-none");
+  const Elinput = document.querySelector(".input-rename");
+  const itemis = dataFilll.map((a) => {
+    if (a.id === id) {
+     return { ...a,
+      name :Elinput.value===''?a.name:Elinput.value
+    }
+    }
+    return a;
+  });
+  const redr = document.querySelector(".data-render");
+  redr.innerHTML = renderMobieSmaill(itemis);
+};
+
+const handlShareCl = (id) => {
+  const ELShare = document.getElementById(`share${id}`);
+  const teds = document.getElementById(`text2${id}`);
+  ELShare.classList.toggle("d-none");
+  teds.classList.toggle("d-none");
+};
+
+const handlSubmitShare = (event, id) => {
+  event.preventDefault();
+  const ElFormRename = document.getElementById(`share${id}`);
+  ElFormRename.classList.toggle("d-none");
+  const EliputShare = document.querySelector(".input-share");
+  const itemis = dataFilll.find((a) => a.id === id);
+  const newnames = {
+    ...itemis,
+    share: EliputShare.value === "" ? itemis.share : EliputShare.value,
+  };
+  if (newnames.share !== "") {
+    ShareData.push(newnames);
+  }
+};
 
 
-if (delte!== undefined){
-  delData.push(delte)
-} else {
-  console.log('khong co gia tri')
+const renderDetail = (obj) => {
+  return `
+  <div class='detail'>
+    <div class='nav-detail'>
+        <p>Ảnh của bạn</p> 
+    </div>
+    <div class='img-detail'>
+        <img class='img-crust' src='${obj.img}'/>
+    </div>
+  </div>
+  `
 }
-redr.innerHTML = renderMobieSmaill(arrayMobi);
-
-}
-
-

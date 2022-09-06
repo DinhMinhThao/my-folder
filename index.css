@@ -236,19 +236,15 @@ label:hover {
 }
 
 .hover-item:hover {
-    background-color:#02283d;
-    color: #f1f3ce;
+    background-color:#f1f3ce;
 }
 
 
 
 .folder-item-2:hover {
-    background-color: var(--hover-item-color);
+    background-color: var(--secondary-text);
 }
 
-.folder-item-2:hover p{
-    color: var(--secondary-text);
-}
 
 .table-right-item {
     text-align: center;
@@ -366,7 +362,7 @@ label:hover {
 
 .list-action-dothree {
     list-style: none;
-    background-color: #7d6969;
+    background-color: #FFFFFF;
     right: 20px;
     top: 40px;
     width: 120px;
@@ -379,7 +375,7 @@ label:hover {
 }
 
 li:hover {
-    background-color: rgb(27, 30, 33);
+    background-color: var(--secondary-text);
     cursor: pointer;
 }
 
@@ -391,8 +387,10 @@ li:hover {
 .list-action-dothree li{
     color: var(--primary-text);
 }
-.head-dot {
-    color: #0099F7;
+li.head-dot {
+    border-bottom: 1px solid gray;
+    color: var(--forcus-action-color);
+    cursor: default;
 }
 
 .all-items{
@@ -479,11 +477,65 @@ li:hover {
 .item-left{
     cursor: pointer;
 }
+img.icon-upload{
+    width: 24px;
+}
+.down-load {
+    font-size: 1rem;
+}
 
+.rename{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+}
+.form-rename{
+    width: 200px;
+    background-color: #c4c4c4;
+    height: 150px;
+    box-shadow: 1px 1px 5px gray;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 8px;
+}
+.input-rename,
+.input-share{
+    padding: 8px 10px;
+    outline: none;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.but-rename {
+    padding: 8px 0;
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    color: var(--secondary-text);
+    border-radius: 4px;
+}
+
+.but-rename:hover {
+    transform: scale(.95);
+    font-weight: 600;
+    transition: all .3s linear;
+}
+.img-detail{
+    padding: 10px 8px;
+}
+.img-detail img{
+    width: 50%;
+    height: 80vh;
+    object-fit: cover;
+}
 
 
 
 @media (max-width:1024px) {
+    html {
+        font-size: 14px;
+    }
     .nav-left {
         display: none;
         top: 0;
@@ -513,6 +565,9 @@ li:hover {
     }
     .wid-item {
         width: 25%;;
+    }
+    .item-right button {
+        margin-left: 12px;
     }
 
 }
@@ -544,6 +599,19 @@ li:hover {
     }
     .mobie {
         display: block;
+    }
+    .item-right button {
+        margin-left: 8px;
+    }
+    .rename {
+     top: 50vh;
+     z-index: 1;   
+    }
+    .img-detail{
+        padding: 0 8px;
+    }
+    .img-detail img{
+        width: 100%;
     }
 }
 
