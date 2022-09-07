@@ -665,6 +665,7 @@ const hanldCkickAddtree = (event) => {
     name: iputvl.value,
     url: "./img/Vector.svg",
     img: "",
+    share:'',
     chinden: [],
   };
   flatData.push(myobj);
@@ -916,8 +917,9 @@ const handlOnfile1 = (event) => {
   const newonj = {
     id: 200 + aisz.length,
     url: "./img/JPG.svg",
-    img: "",
+    img: `${URL.createObjectURL(event.target.files[0])}`,
     name: fileo1(),
+    share:'',
     chinden: null,
   };
   flatData.push(newonj);
@@ -1252,7 +1254,7 @@ const renderMobieSmaill = (obj) => {
       <div class='row a-center items items-mobie'>
           <img class='color-icon' src='${a.url}'/>
           <p onclick='handlClickMobie2(${a.id})' >${a.name}</p>
-          <p id='share-name${a.id}' class=''> /${a.share===''? 'Riêng tư':a.share}</p>
+          <p id='share-name${a.id}' class='all-share d-nonef'> /${a.share===''? 'Riêng tư':a.share}</p>
       </div>
       <div class='icon-t-mobie'>
           <img onclick='handlClickLis2(${a.id})' class='' src='./img/DotsThreeVertical.svg'/>
@@ -1395,11 +1397,13 @@ const handlClickMobie2 = (id) => {
 
 const handlOnfileMobie = (event, id) => {
   const casd = document.querySelector(".data-render");
+
   fileoSet(event.target.files[0].name);
   const newonj = {
     id: 9000 + RecenMobie.length,
     url: "./img/JPG.svg",
-    img: "",
+    img: `${URL.createObjectURL(event.target.files[0])}`,
+    share:'',
     name: fileo().length < 15 ? fileo() : fileo().slice(0, 14) + "...",
     chinden: null,
   };
@@ -1423,6 +1427,7 @@ const handlOnfileMobie = (event, id) => {
   }
 
   casd.innerHTML = renderMobieSmaill(dataFilll);
+  console.log(event)
 };
 
 const hanldCkickAddMobie = (event) => {
@@ -1436,6 +1441,7 @@ const hanldCkickAddMobie = (event) => {
     name: iputvl.value,
     url: "./img/Vector.svg",
     img: "",
+    share:'',
     chinden: [],
   };
   flatData.push(myobj);
@@ -1453,8 +1459,10 @@ const mobiClickHead = (id) => {
   idding = id;
   const allMobie = document.querySelectorAll(".tree-mobie-small");
   const cardMobie = document.getElementById(`mobie${id}`);
+  const cardshare = document.getElementById(`share-name${id}`)
   allMobie.forEach((a) => (a.style.backgroundColor = "#FFFFFF"));
   cardMobie.style.backgroundColor = "#f1f3ce";
+  cardshare.classList.toggle('d-none')
 };
 
 const handlClickHome = () => {
@@ -1465,17 +1473,27 @@ const handlClickHome = () => {
 };
 
 const handDeteMobie = (id) => {
+  const racst = confirm('Bạn thật sự muốn xóa')
+
   const redr = document.querySelector(".data-render");
   const delte = arrayMobi.find((a) => a.id === idding);
-  arrayMobi.splice(arrayMobi.indexOf(delte), 1);
 
-  if (delte !== undefined) {
-    delData.push(delte);
+  if (racst) {
+    arrayMobi.splice(arrayMobi.indexOf(delte), 1);
+
+    if (delte !== undefined) {
+      delData.push(delte);
+    } else {
+      console.log("khong co gia tri");
+    }
+    redr.innerHTML = renderMobieSmaill(arrayMobi);
   } else {
-    console.log("khong co gia tri");
+    const shows = document.getElementById(`text2${id}`);
+    shows.classList.toggle("d-none");
   }
-  redr.innerHTML = renderMobieSmaill(arrayMobi);
-};
+  
+  } 
+
 
 const handlClickLis2 = (id) => {
   const headed = document.querySelector(".header-hese");
