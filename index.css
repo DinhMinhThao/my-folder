@@ -92,16 +92,18 @@
     border-left: 2px solid var(--forcus-action-color);
 
 }
-
-.nav-list-focus img,
 .nav-list-focus p {
     color: var(--forcus-action-color);
+}
+.nav-list-focus img{
+
     filter: invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
       brightness(87%) contrast(101%);
 }
-.nav-list:hover img,
 .nav-list:hover p {
     color: var(--forcus-action-color);
+}
+.nav-list:hover img{
     filter: invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
       brightness(87%) contrast(101%);
 }
@@ -216,7 +218,7 @@ label:hover {
 }
 .folder-item-2{
     padding: 8px;
-    border-bottom: .5px solid gray;
+
 }
 
 .items img{
@@ -429,8 +431,10 @@ li.head-dot {
 }
 
 .NoneF {
-    width: 100%;
-    
+    width: 100%; 
+}
+.nav-detail{
+    margin-top: 10px;
 }
 
 .items-re{
@@ -613,6 +617,9 @@ img.icon-upload{
     }
     .img-detail img{
         width: 100%;
+    }
+    .nav-detail{
+        margin-top: 0;
     }
 }
 

@@ -210,38 +210,38 @@ const renderdata = () => {
         <div class="nav-list-items">
           <div onclick='handlREN()' class="row a-center nav-list nav-list-focus">
             <div class="col-2">
-              <img class="color-icon" src="./img/Folder.svg" alt="" />
+              <img class="color-icon img-my-file" src="./img/Folder.svg" alt="" />
             </div>
             <div  class="col-10">
-              <p  class="name-user">Tệp của tôi</p>
+              <p  class="name-user name-user-myfile">Tệp của tôi</p>
             </div>
           </div>
-          <div onclick='handlRecos()' class="row a-center nav-list">
+          <div onclick='handlRecos()' class="row a-center nav-list recos-color">
             <div class="col-2">
               <img
-                class="color-icon"
+                class="color-icon img-recos-new"
                 src="./img/ClockCounterClockwise.svg"
                 alt=""
               />
             </div>
             <div  class="col-10">
-              <p  class="name-user">Gần đây</p>
+              <p  class="name-user name-user-recos">Gần đây</p>
             </div>
           </div>
-          <div onclick='handlShare()' class="row a-center nav-list">
+          <div onclick='handlShare()' class="row a-center nav-list share-color">
             <div class="col-2">
-              <img class="color-icon" src="./img/Users.svg" alt="" />
+              <img class="color-icon img-share" src="./img/Users.svg" alt="" />
             </div>
             <div class="col-10">
-              <p class="name-user">Đã chia sẻ</p>
+              <p class="name-user name-user-share">Đã chia sẻ</p>
             </div>
           </div>
-          <div onclick='handlShowDele()' class="row a-center nav-list">
+          <div onclick='handlShowDele()' class="row a-center nav-list track-color">
             <div class="col-2">
-              <img class="color-icon" src="./img/Trash.svg" alt="" />
+              <img class="color-icon img-track" src="./img/Trash.svg" alt="" />
             </div>
             <div class="col-10">
-              <p class="name-user">Thùng rác</p>
+              <p class="name-user name-user-track">Thùng rác</p>
             </div>
           </div>
         </div>
@@ -876,7 +876,12 @@ const handlSubmitShare2 = (event,id) => {
   };
   if (newnames.share !== "") {
     ShareData.push(newnames);
+    window.setTimeout(alertMess(EliputShare.value),1500)
   }
+}
+
+const alertMess = (texts) => {
+  alert('Chia sẻ thành công tới: '+texts)
 }
 
 const handlSubmitbtn = (event, id) => {
@@ -1102,6 +1107,49 @@ const handlShare = () => {
   TextEl.innerHTML = `<p>File và Folder đã được chia sẻ</p>`;
   const navbar = document.querySelector(".nav-left");
   navbar.classList.toggle("hidenone");
+
+
+
+
+  const elMyfileBg = document.querySelector('.nav-list-focus');
+  const elMyfileimg = document.querySelector('.img-my-file');
+  const elMyfilengme = document.querySelector('p.name-user-myfile');
+
+  elMyfileBg.style.borderLeft='2px solid transparent';
+  elMyfileimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  contrast(92%)`;
+  elMyfilengme.style.color='#f1f3ce';
+
+  const elRecosBg = document.querySelector('.recos-color');
+  const elRecosimg = document.querySelector('.img-recos-new');
+  const elRecosngme = document.querySelector('.name-user-recos');
+
+  elRecosBg.style.borderLeft='2px solid transparent';
+  elRecosimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  contrast(92%)`;
+  elRecosngme.style.color='#f1f3ce';
+
+
+  const elShareBg = document.querySelector('.share-color');
+  const elShareimg = document.querySelector('.img-share');
+  const elSharengme = document.querySelector('.name-user-share');
+
+  elShareBg.style.borderLeft='2px solid #1f78d4';
+  elShareimg.style.filter=`invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+  brightness(87%) contrast(101%)`;
+  elSharengme.style.color='#1f78d4';
+
+  const elTrackBg = document.querySelector('.track-color');
+  const elTrackimg = document.querySelector('.img-track');
+  const elTrackngme = document.querySelector('.name-user-track');
+
+  elTrackBg.style.borderLeft='2px solid transparent';
+  elTrackimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elTrackngme.style.color='#f1f3ce';
+
+
+
 };
 
 // Recos
@@ -1143,6 +1191,50 @@ const handlRecos = () => {
   TextEl.innerHTML = `<p>File và Folder đã thêm gần đây</p>`;
   const navbar = document.querySelector(".nav-left");
   navbar.classList.toggle("hidenone");
+
+
+
+
+  const elMyfileBg = document.querySelector('.nav-list-focus');
+  const elMyfileimg = document.querySelector('.img-my-file');
+  const elMyfilengme = document.querySelector('p.name-user-myfile');
+
+  elMyfileBg.style.borderLeft='2px solid transparent';
+  elMyfileimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  contrast(92%)`;
+  elMyfilengme.style.color='#f1f3ce';
+
+  const elRecosBg = document.querySelector('.recos-color');
+  const elRecosimg = document.querySelector('.img-recos-new');
+  const elRecosngme = document.querySelector('.name-user-recos');
+
+  elRecosBg.style.borderLeft='2px solid #1f78d4';
+  elRecosimg.style.filter=`invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+  brightness(87%) contrast(101%)`;
+  elRecosngme.style.color='#1f78d4';
+
+
+  const elShareBg = document.querySelector('.share-color');
+  const elShareimg = document.querySelector('.img-share');
+  const elSharengme = document.querySelector('.name-user-share');
+
+  elShareBg.style.borderLeft='2px solid transparent';
+  elShareimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elSharengme.style.color='#f1f3ce';
+
+  const elTrackBg = document.querySelector('.track-color');
+  const elTrackimg = document.querySelector('.img-track');
+  const elTrackngme = document.querySelector('.name-user-track');
+
+  elTrackBg.style.borderLeft='2px solid transparent';
+  elTrackimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elTrackngme.style.color='#f1f3ce';
+
+
+
+
 };
 
 const handlShowDele = () => {
@@ -1184,6 +1276,48 @@ const handlShowDele = () => {
   TextEl.innerHTML = `<p>File và Folder đã xóa</p>`;
   const navbar = document.querySelector(".nav-left");
   navbar.classList.toggle("hidenone");
+
+
+  const elMyfileBg = document.querySelector('.nav-list-focus');
+  const elMyfileimg = document.querySelector('.img-my-file');
+  const elMyfilengme = document.querySelector('p.name-user-myfile');
+
+  elMyfileBg.style.borderLeft='2px solid transparent';
+  elMyfileimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  contrast(92%)`;
+  elMyfilengme.style.color='#f1f3ce';
+
+  const elRecosBg = document.querySelector('.recos-color');
+  const elRecosimg = document.querySelector('.img-recos-new');
+  const elRecosngme = document.querySelector('.name-user-recos');
+
+  elRecosBg.style.borderLeft='2px solid transparent';
+  elRecosimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  contrast(92%)`;
+  elRecosngme.style.color='#f1f3ce';
+
+
+  const elShareBg = document.querySelector('.share-color');
+  const elShareimg = document.querySelector('.img-share');
+  const elSharengme = document.querySelector('.name-user-share');
+
+  elShareBg.style.borderLeft='2px solid transparent';
+  elShareimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  contrast(92%)`;
+  elSharengme.style.color='#f1f3ce';
+
+  const elTrackBg = document.querySelector('.track-color');
+  const elTrackimg = document.querySelector('.img-track');
+  const elTrackngme = document.querySelector('.name-user-track');
+
+  elTrackBg.style.borderLeft='2px solid #1f78d4';
+  elTrackimg.style.filter=`invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+  brightness(87%) contrast(101%)`;
+  elTrackngme.style.color='#1f78d4';
+
+
+
+
 };
 
 const handlREN = () => {
@@ -1191,6 +1325,47 @@ const handlREN = () => {
   flera.innerHTML = renderTabe(adfads);
   const navbar = document.querySelector(".nav-left");
   navbar.classList.toggle("hidenone");
+
+
+
+
+  const elMyfileBg = document.querySelector('.nav-list-focus');
+  const elMyfileimg = document.querySelector('.img-my-file');
+  const elMyfilengme = document.querySelector('.name-user.name-user-myfile');
+
+  elMyfileBg.style.borderLeft='2px solid #1f78d4';
+  elMyfileimg.style.filter=`invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+  brightness(87%) contrast(101%)`;
+  elMyfilengme.style.color='#1f78d4';
+
+  const elRecosBg = document.querySelector('.recos-color');
+  const elRecosimg = document.querySelector('.img-recos-new');
+  const elRecosngme = document.querySelector('.name-user-recos');
+
+  elRecosBg.style.borderLeft='2px solid transparent';
+  elRecosimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  contrast(92%)`;
+  elRecosngme.style.color='#f1f3ce';
+
+
+  const elShareBg = document.querySelector('.share-color');
+  const elShareimg = document.querySelector('.img-share');
+  const elSharengme = document.querySelector('.name-user-share');
+
+  elShareBg.style.borderLeft='2px solid transparent';
+  elShareimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elSharengme.style.color='#f1f3ce';
+
+  const elTrackBg = document.querySelector('.track-color');
+  const elTrackimg = document.querySelector('.img-track');
+  const elTrackngme = document.querySelector('.name-user-track');
+
+  elTrackBg.style.borderLeft='2px solid transparent';
+  elTrackimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elTrackngme.style.color='#f1f3ce';
+
 };
 
 const handlREN2 = () => {
@@ -1545,6 +1720,7 @@ const handlSubmitShare = (event, id) => {
   };
   if (newnames.share !== "") {
     ShareData.push(newnames);
+    window.setTimeout(alertMess(EliputShare.value),1500);
   }
 };
 
