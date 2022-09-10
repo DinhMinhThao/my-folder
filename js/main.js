@@ -869,17 +869,23 @@ const handlRename = (id) => {
 const handlSubmitShare2 = (event, id) => {
   event.preventDefault();
   const ElFormRename = document.getElementById(`share${id}`);
-  ElFormRename.classList.toggle("d-none");
   const EliputShare = document.querySelector(".input-share");
   const itemis = csdcc.find((a) => a.id === id);
-  const newnames = {
-    ...itemis,
-    share: EliputShare.value === "" ? itemis.share : EliputShare.value,
-  };
-  if (newnames.share !== "") {
-    ShareData.push(newnames);
-    window.setTimeout(alertMess(EliputShare.value), 1500);
+  if (!EMAIL.test(EliputShare.value)) {
+    alert("Hay nhap dia chi email hop le.\nExample@gmail.com");
+    return false;
+  } else {
+    const newnames = {
+      ...itemis,
+      share: EliputShare.value === "" ? itemis.share : EliputShare.value,
+    };
+    if (newnames.share !== "") {
+      ShareData.push(newnames);
+      window.setTimeout(alertMess(EliputShare.value), 1500);
+    }
+    ElFormRename.classList.toggle("d-none");
   }
+
 };
 
 const alertMess = (texts) => {
