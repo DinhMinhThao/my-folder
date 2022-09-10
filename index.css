@@ -133,11 +133,12 @@
 }
 
 .text-main-text,
-.upload-text {
+.upload-text,
+.text-main-text-2 {
     color: var(--secondary-text);
     padding-left: 4px;
 }
-label.upload {
+.label.upload {
     padding: 10px;
     border-radius: 8px;
 }
@@ -148,7 +149,7 @@ label.upload {
     cursor: pointer;
     transition: all .3s linear;
 }
-label:hover {
+.label:hover {
     background-color: var(--forcus-action-color);
     transform: scale(0.8);
     cursor: pointer;
@@ -190,6 +191,9 @@ label:hover {
     width: calc(100% - 200px);
     background-color: #FAFAFA;
 
+}
+#name-tree{
+width: 100%;
 }
 
 .table-right-item{
@@ -410,6 +414,10 @@ li.head-dot {
     margin-bottom: 8px;
 }
 
+.item-left-2 {
+    padding: 6px 0;
+}
+
 .acout-action img {
     width: 50%;
 }
@@ -456,7 +464,13 @@ li.head-dot {
     background-color: var(--forcus-action-color);
     transform: scale(.9);
 }
-
+.input-infor-user{
+    padding: 10px;
+    width: 250px;
+    margin: 4px 0 8px 0;
+    outline: none;
+    border-radius: 8px;
+}
 .tree-mobie-small{
     padding: 8px;
 }
@@ -533,9 +547,50 @@ img.icon-upload{
     height: 80vh;
     object-fit: cover;
 }
+.infor-all-items {
+    padding: 20px;
+    background-color: #e7e7e7;
+    height: calc(100vh - 60px);
+}
 
-
-
+.logo-login-user {
+    padding: 10px 15px 10px 15px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    font-size: 20px;
+    background: #6060b4;
+    color: white;
+    margin-bottom: 12px;
+}
+.infor-top{
+    margin-bottom: 10px;
+}
+.name-user-space{
+    padding: 8px 0 4px 0;
+}
+.form-infor-user label {
+    font-size: 14px;
+}
+.btn-infor-user {
+    padding: 8px 12px;
+    background-color: var(--secondary-color);
+    color: var(--secondary-text);
+    font-weight: 400;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-infor-user:hover {
+    transform: scale(.9);
+    transition: all .3s linear;
+}
+.text-check{
+    color: red;
+    font-size: 12px;
+}
+.show-sasess {
+    text-align: center;
+    margin-top: 20px;
+}
 
 @media (max-width:1024px) {
     html {

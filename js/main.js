@@ -247,12 +247,12 @@ const renderdata = () => {
         </div>
 
         <div class="acout-action">
-            <div class="row a-center nav-list">
+            <div onclick='handlInfor()' class="row a-center nav-list bg-infor-color">
                 <div class="col-2">
-                  <img class="color-icon" src="./img/VectorUser.svg" alt="" />
+                  <img class="color-icon img-infor-color" src="./img/VectorUser.svg" alt="" />
                 </div>
                 <div class="col-10">
-                  <p class="name-user">Thông tin tài khoàn</p>
+                  <p class="name-user name-infor-color">Thông tin tài khoàn</p>
                 </div>
               </div>
               <div onclick='handlLogout()' class="row a-center nav-list">
@@ -284,6 +284,7 @@ const renderTabe = (obj) => {
   return `
   <div class='render-next'>
       <div class='header-hese'>${header()}</div>
+      <div class='re-here'>
         <div class='mobie'>
         <div class='row a-center head-text-mobie'>
           <div class='row a-center' onclick='handlClickHome()'>
@@ -316,6 +317,7 @@ const renderTabe = (obj) => {
                     </div>
                     <div class='table-right-item'></div>
           </div>  
+      </div>
       </div>
   </div>
   
@@ -355,7 +357,7 @@ const header = () => {
         <div class="item-right">
           <div class="row a-center">
               <input onchange='handlOnfile(event)' class='d-none' type='file' id='file' name='file'/>
-              <label for='file' class="upload row a-center">
+              <label  for='file' class="upload label row a-center">
                 <img class="color-icon icon-upload" src="./img/ArrowLineUp.svg" alt="upload" />
                 <p class="upload-text">Upload</p>
               </label>
@@ -437,6 +439,7 @@ const handlOnfile = (event) => {
     url: "./img/JPG.svg",
     img: "",
     name: fileo().length < 15 ? fileo() : fileo().slice(0, 14) + "...",
+    share:'',
     chinden: null,
   };
   flatData.push(newonj);
@@ -581,7 +584,7 @@ const handlClickFolder = (id) => {
   nameLink1.style.display = "none";
   nameLink2.style.display = "none";
   if (arr.chinden === null) {
-    asc.innerHTML = renderDetail(arr)
+    asc.innerHTML = renderDetail(arr);
   } else if (arr.chinden.length === 0) asc.innerHTML = "Thư mục này trống";
   else {
     asc.innerHTML = renderFolderbig(arr.chinden);
@@ -612,7 +615,7 @@ const handlC2 = (id) => {
     <img src='./img/CaretRight.svg'> ${fixName1()}</p>`;
   nameLink2.style.display = "none";
   if (arr2.chinden === null) {
-    asc.innerHTML = renderDetail(arr2)
+    asc.innerHTML = renderDetail(arr2);
   } else if (arr2.chinden.length === 0) asc.innerHTML = "Thư mục này trống";
   else {
     asc.innerHTML = arr2.chinden
@@ -665,7 +668,7 @@ const hanldCkickAddtree = (event) => {
     name: iputvl.value,
     url: "./img/Vector.svg",
     img: "",
-    share:'',
+    share: "",
     chinden: [],
   };
   flatData.push(myobj);
@@ -699,7 +702,7 @@ const handlC23 = (id) => {
 <img src='./img/CaretRight.svg'>
 ${fixName2()}</p>`;
   if (arr2.chinden === null) {
-    asc.innerHTML = renderDetail(arr2)
+    asc.innerHTML = renderDetail(arr2);
   } else if (arr2.chinden.length === 0)
     asc.innerHTML = `<p style="padding: 10px;">Thư mục này trống</p>`;
   else {
@@ -748,7 +751,7 @@ const handlClickSearh = (id) => {
   headed.innerHTML = renderHeader(id);
   const arr4 = flatData.find((a) => a.id === id);
   if (arr4.chinden === null) {
-    asc.innerHTML = renderDetail(arr4)
+    asc.innerHTML = renderDetail(arr4);
   } else if (arr4.chinden.length === 0)
     asc.innerHTML = `<p style="padding: 10px;">Thư mục này trống</p>`;
   else {
@@ -791,7 +794,7 @@ const renderHeader = (id, obj) => {
             <div class="item-right">
               <div class="row a-center">
                   <input onchange='handlOnfile1(event)' class='d-none' type='file' id='file' name='file'/>
-                  <label for='file' class="upload row a-center">
+                  <label for='file' class=" label upload row a-center">
                     <img class="color-icon icon-upload" src="./img/ArrowLineUp.svg" alt="upload" />
                     <p class="upload-text">Upload</p>
                   </label>
@@ -861,10 +864,9 @@ const handlRename = (id) => {
   const teds = document.getElementById(`text${id}`);
   ElFormRename.classList.toggle("d-none");
   teds.classList.toggle("d-block");
-
 };
 
-const handlSubmitShare2 = (event,id) => {
+const handlSubmitShare2 = (event, id) => {
   event.preventDefault();
   const ElFormRename = document.getElementById(`share${id}`);
   ElFormRename.classList.toggle("d-none");
@@ -876,13 +878,13 @@ const handlSubmitShare2 = (event,id) => {
   };
   if (newnames.share !== "") {
     ShareData.push(newnames);
-    window.setTimeout(alertMess(EliputShare.value),1500)
+    window.setTimeout(alertMess(EliputShare.value), 1500);
   }
-}
+};
 
 const alertMess = (texts) => {
-  alert('Chia sẻ thành công tới: '+texts)
-}
+  alert("Chia sẻ thành công tới: " + texts);
+};
 
 const handlSubmitbtn = (event, id) => {
   event.preventDefault();
@@ -924,7 +926,7 @@ const handlOnfile1 = (event) => {
     url: "./img/JPG.svg",
     img: `${URL.createObjectURL(event.target.files[0])}`,
     name: fileo1(),
-    share:'',
+    share: "",
     chinden: null,
   };
   flatData.push(newonj);
@@ -1108,48 +1110,49 @@ const handlShare = () => {
   const navbar = document.querySelector(".nav-left");
   navbar.classList.toggle("hidenone");
 
+  const elMyfileBg = document.querySelector(".nav-list-focus");
+  const elMyfileimg = document.querySelector(".img-my-file");
+  const elMyfilengme = document.querySelector("p.name-user-myfile");
 
-
-
-  const elMyfileBg = document.querySelector('.nav-list-focus');
-  const elMyfileimg = document.querySelector('.img-my-file');
-  const elMyfilengme = document.querySelector('p.name-user-myfile');
-
-  elMyfileBg.style.borderLeft='2px solid transparent';
-  elMyfileimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elMyfileBg.style.borderLeft = "2px solid transparent";
+  elMyfileimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
   contrast(92%)`;
-  elMyfilengme.style.color='#f1f3ce';
+  elMyfilengme.style.color = "#f1f3ce";
 
-  const elRecosBg = document.querySelector('.recos-color');
-  const elRecosimg = document.querySelector('.img-recos-new');
-  const elRecosngme = document.querySelector('.name-user-recos');
+  const elRecosBg = document.querySelector(".recos-color");
+  const elRecosimg = document.querySelector(".img-recos-new");
+  const elRecosngme = document.querySelector(".name-user-recos");
 
-  elRecosBg.style.borderLeft='2px solid transparent';
-  elRecosimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elRecosBg.style.borderLeft = "2px solid transparent";
+  elRecosimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
   contrast(92%)`;
-  elRecosngme.style.color='#f1f3ce';
+  elRecosngme.style.color = "#f1f3ce";
 
+  const elShareBg = document.querySelector(".share-color");
+  const elShareimg = document.querySelector(".img-share");
+  const elSharengme = document.querySelector(".name-user-share");
 
-  const elShareBg = document.querySelector('.share-color');
-  const elShareimg = document.querySelector('.img-share');
-  const elSharengme = document.querySelector('.name-user-share');
-
-  elShareBg.style.borderLeft='2px solid #1f78d4';
-  elShareimg.style.filter=`invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+  elShareBg.style.borderLeft = "2px solid #1f78d4";
+  elShareimg.style.filter = `invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
   brightness(87%) contrast(101%)`;
-  elSharengme.style.color='#1f78d4';
+  elSharengme.style.color = "#1f78d4";
 
-  const elTrackBg = document.querySelector('.track-color');
-  const elTrackimg = document.querySelector('.img-track');
-  const elTrackngme = document.querySelector('.name-user-track');
+  const elTrackBg = document.querySelector(".track-color");
+  const elTrackimg = document.querySelector(".img-track");
+  const elTrackngme = document.querySelector(".name-user-track");
 
-  elTrackBg.style.borderLeft='2px solid transparent';
-  elTrackimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elTrackBg.style.borderLeft = "2px solid transparent";
+  elTrackimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
     contrast(92%)`;
-  elTrackngme.style.color='#f1f3ce';
+  elTrackngme.style.color = "#f1f3ce";
 
-
-
+  const elInforBg = document.querySelector(".bg-infor-color");
+  const elInforimg = document.querySelector(".img-infor-color");
+  const elInforngme = document.querySelector(".name-infor-color");
+  elInforBg.style.borderLeft = "2px solid transparent";
+  elInforimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elInforngme.style.color = "#f1f3ce";
 };
 
 // Recos
@@ -1192,49 +1195,49 @@ const handlRecos = () => {
   const navbar = document.querySelector(".nav-left");
   navbar.classList.toggle("hidenone");
 
+  const elMyfileBg = document.querySelector(".nav-list-focus");
+  const elMyfileimg = document.querySelector(".img-my-file");
+  const elMyfilengme = document.querySelector("p.name-user-myfile");
 
-
-
-  const elMyfileBg = document.querySelector('.nav-list-focus');
-  const elMyfileimg = document.querySelector('.img-my-file');
-  const elMyfilengme = document.querySelector('p.name-user-myfile');
-
-  elMyfileBg.style.borderLeft='2px solid transparent';
-  elMyfileimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elMyfileBg.style.borderLeft = "2px solid transparent";
+  elMyfileimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
   contrast(92%)`;
-  elMyfilengme.style.color='#f1f3ce';
+  elMyfilengme.style.color = "#f1f3ce";
 
-  const elRecosBg = document.querySelector('.recos-color');
-  const elRecosimg = document.querySelector('.img-recos-new');
-  const elRecosngme = document.querySelector('.name-user-recos');
+  const elRecosBg = document.querySelector(".recos-color");
+  const elRecosimg = document.querySelector(".img-recos-new");
+  const elRecosngme = document.querySelector(".name-user-recos");
 
-  elRecosBg.style.borderLeft='2px solid #1f78d4';
-  elRecosimg.style.filter=`invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+  elRecosBg.style.borderLeft = "2px solid #1f78d4";
+  elRecosimg.style.filter = `invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
   brightness(87%) contrast(101%)`;
-  elRecosngme.style.color='#1f78d4';
+  elRecosngme.style.color = "#1f78d4";
 
+  const elShareBg = document.querySelector(".share-color");
+  const elShareimg = document.querySelector(".img-share");
+  const elSharengme = document.querySelector(".name-user-share");
 
-  const elShareBg = document.querySelector('.share-color');
-  const elShareimg = document.querySelector('.img-share');
-  const elSharengme = document.querySelector('.name-user-share');
-
-  elShareBg.style.borderLeft='2px solid transparent';
-  elShareimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elShareBg.style.borderLeft = "2px solid transparent";
+  elShareimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
     contrast(92%)`;
-  elSharengme.style.color='#f1f3ce';
+  elSharengme.style.color = "#f1f3ce";
 
-  const elTrackBg = document.querySelector('.track-color');
-  const elTrackimg = document.querySelector('.img-track');
-  const elTrackngme = document.querySelector('.name-user-track');
+  const elTrackBg = document.querySelector(".track-color");
+  const elTrackimg = document.querySelector(".img-track");
+  const elTrackngme = document.querySelector(".name-user-track");
 
-  elTrackBg.style.borderLeft='2px solid transparent';
-  elTrackimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elTrackBg.style.borderLeft = "2px solid transparent";
+  elTrackimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
     contrast(92%)`;
-  elTrackngme.style.color='#f1f3ce';
+  elTrackngme.style.color = "#f1f3ce";
 
-
-
-
+  const elInforBg = document.querySelector(".bg-infor-color");
+  const elInforimg = document.querySelector(".img-infor-color");
+  const elInforngme = document.querySelector(".name-infor-color");
+  elInforBg.style.borderLeft = "2px solid transparent";
+  elInforimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elInforngme.style.color = "#f1f3ce";
 };
 
 const handlShowDele = () => {
@@ -1277,47 +1280,49 @@ const handlShowDele = () => {
   const navbar = document.querySelector(".nav-left");
   navbar.classList.toggle("hidenone");
 
+  const elMyfileBg = document.querySelector(".nav-list-focus");
+  const elMyfileimg = document.querySelector(".img-my-file");
+  const elMyfilengme = document.querySelector("p.name-user-myfile");
 
-  const elMyfileBg = document.querySelector('.nav-list-focus');
-  const elMyfileimg = document.querySelector('.img-my-file');
-  const elMyfilengme = document.querySelector('p.name-user-myfile');
-
-  elMyfileBg.style.borderLeft='2px solid transparent';
-  elMyfileimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elMyfileBg.style.borderLeft = "2px solid transparent";
+  elMyfileimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
   contrast(92%)`;
-  elMyfilengme.style.color='#f1f3ce';
+  elMyfilengme.style.color = "#f1f3ce";
 
-  const elRecosBg = document.querySelector('.recos-color');
-  const elRecosimg = document.querySelector('.img-recos-new');
-  const elRecosngme = document.querySelector('.name-user-recos');
+  const elRecosBg = document.querySelector(".recos-color");
+  const elRecosimg = document.querySelector(".img-recos-new");
+  const elRecosngme = document.querySelector(".name-user-recos");
 
-  elRecosBg.style.borderLeft='2px solid transparent';
-  elRecosimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elRecosBg.style.borderLeft = "2px solid transparent";
+  elRecosimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
   contrast(92%)`;
-  elRecosngme.style.color='#f1f3ce';
+  elRecosngme.style.color = "#f1f3ce";
 
+  const elShareBg = document.querySelector(".share-color");
+  const elShareimg = document.querySelector(".img-share");
+  const elSharengme = document.querySelector(".name-user-share");
 
-  const elShareBg = document.querySelector('.share-color');
-  const elShareimg = document.querySelector('.img-share');
-  const elSharengme = document.querySelector('.name-user-share');
-
-  elShareBg.style.borderLeft='2px solid transparent';
-  elShareimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elShareBg.style.borderLeft = "2px solid transparent";
+  elShareimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
   contrast(92%)`;
-  elSharengme.style.color='#f1f3ce';
+  elSharengme.style.color = "#f1f3ce";
 
-  const elTrackBg = document.querySelector('.track-color');
-  const elTrackimg = document.querySelector('.img-track');
-  const elTrackngme = document.querySelector('.name-user-track');
+  const elTrackBg = document.querySelector(".track-color");
+  const elTrackimg = document.querySelector(".img-track");
+  const elTrackngme = document.querySelector(".name-user-track");
 
-  elTrackBg.style.borderLeft='2px solid #1f78d4';
-  elTrackimg.style.filter=`invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+  elTrackBg.style.borderLeft = "2px solid #1f78d4";
+  elTrackimg.style.filter = `invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
   brightness(87%) contrast(101%)`;
-  elTrackngme.style.color='#1f78d4';
+  elTrackngme.style.color = "#1f78d4";
 
-
-
-
+  const elInforBg = document.querySelector(".bg-infor-color");
+  const elInforimg = document.querySelector(".img-infor-color");
+  const elInforngme = document.querySelector(".name-infor-color");
+  elInforBg.style.borderLeft = "2px solid transparent";
+  elInforimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elInforngme.style.color = "#f1f3ce";
 };
 
 const handlREN = () => {
@@ -1326,46 +1331,49 @@ const handlREN = () => {
   const navbar = document.querySelector(".nav-left");
   navbar.classList.toggle("hidenone");
 
+  const elMyfileBg = document.querySelector(".nav-list-focus");
+  const elMyfileimg = document.querySelector(".img-my-file");
+  const elMyfilengme = document.querySelector(".name-user.name-user-myfile");
 
-
-
-  const elMyfileBg = document.querySelector('.nav-list-focus');
-  const elMyfileimg = document.querySelector('.img-my-file');
-  const elMyfilengme = document.querySelector('.name-user.name-user-myfile');
-
-  elMyfileBg.style.borderLeft='2px solid #1f78d4';
-  elMyfileimg.style.filter=`invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+  elMyfileBg.style.borderLeft = "2px solid #1f78d4";
+  elMyfileimg.style.filter = `invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
   brightness(87%) contrast(101%)`;
-  elMyfilengme.style.color='#1f78d4';
+  elMyfilengme.style.color = "#1f78d4";
 
-  const elRecosBg = document.querySelector('.recos-color');
-  const elRecosimg = document.querySelector('.img-recos-new');
-  const elRecosngme = document.querySelector('.name-user-recos');
+  const elRecosBg = document.querySelector(".recos-color");
+  const elRecosimg = document.querySelector(".img-recos-new");
+  const elRecosngme = document.querySelector(".name-user-recos");
 
-  elRecosBg.style.borderLeft='2px solid transparent';
-  elRecosimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elRecosBg.style.borderLeft = "2px solid transparent";
+  elRecosimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
   contrast(92%)`;
-  elRecosngme.style.color='#f1f3ce';
+  elRecosngme.style.color = "#f1f3ce";
 
+  const elShareBg = document.querySelector(".share-color");
+  const elShareimg = document.querySelector(".img-share");
+  const elSharengme = document.querySelector(".name-user-share");
 
-  const elShareBg = document.querySelector('.share-color');
-  const elShareimg = document.querySelector('.img-share');
-  const elSharengme = document.querySelector('.name-user-share');
-
-  elShareBg.style.borderLeft='2px solid transparent';
-  elShareimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elShareBg.style.borderLeft = "2px solid transparent";
+  elShareimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
     contrast(92%)`;
-  elSharengme.style.color='#f1f3ce';
+  elSharengme.style.color = "#f1f3ce";
 
-  const elTrackBg = document.querySelector('.track-color');
-  const elTrackimg = document.querySelector('.img-track');
-  const elTrackngme = document.querySelector('.name-user-track');
+  const elTrackBg = document.querySelector(".track-color");
+  const elTrackimg = document.querySelector(".img-track");
+  const elTrackngme = document.querySelector(".name-user-track");
 
-  elTrackBg.style.borderLeft='2px solid transparent';
-  elTrackimg.style.filter=`invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  elTrackBg.style.borderLeft = "2px solid transparent";
+  elTrackimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
     contrast(92%)`;
-  elTrackngme.style.color='#f1f3ce';
+  elTrackngme.style.color = "#f1f3ce";
 
+  const elInforBg = document.querySelector(".bg-infor-color");
+  const elInforimg = document.querySelector(".img-infor-color");
+  const elInforngme = document.querySelector(".name-infor-color");
+  elInforBg.style.borderLeft = "2px solid transparent";
+  elInforimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elInforngme.style.color = "#f1f3ce";
 };
 
 const handlREN2 = () => {
@@ -1425,14 +1433,20 @@ const renderMobieSmaill = (obj) => {
   return (redut += [...obj]
     .map(
       (a) => `
-  <div id='mobie${a.id}' onclick='mobiClickHead(${a.id})' class='tree-mobie-small row j-between a-center p-relative'>
+  <div id='mobie${a.id}' onclick='mobiClickHead(${
+        a.id
+      })' class='tree-mobie-small row j-between a-center p-relative'>
       <div class='row a-center items items-mobie'>
           <img class='color-icon' src='${a.url}'/>
           <p onclick='handlClickMobie2(${a.id})' >${a.name}</p>
-          <p id='share-name${a.id}' class='all-share d-nonef'> /${a.share===''? 'Riêng tư':a.share}</p>
+          <p id='share-name${a.id}' class='all-share d-nonef'> /${
+        a.share === "" ? "Riêng tư" : a.share
+      }</p>
       </div>
       <div class='icon-t-mobie'>
-          <img onclick='handlClickLis2(${a.id})' class='' src='./img/DotsThreeVertical.svg'/>
+          <img onclick='handlClickLis2(${
+            a.id
+          })' class='' src='./img/DotsThreeVertical.svg'/>
       </div>
       <ul id='text2${a.id}' class='list-action-dothree p-absolute d-none'>
       <li class='head-dot row j-center'>${a.name}</li>
@@ -1468,7 +1482,7 @@ const renderHeader2 = (id, obj) => {
             <div class="item-right">
               <div class="row a-center">
                   <input onchange='handlOnfileMobie(event,${id})' class='d-none' type='file' id='file' name='file'/>
-                  <label for='file' class="upload row a-center">
+                  <label  for='file' class="upload label row a-center">
                     <img class="color-icon icon-upload" src="./img/ArrowLineUp.svg" alt="upload" />
                     <p class="upload-text">Upload</p>
                   </label>
@@ -1541,8 +1555,7 @@ const handlClickMobie = (id) => {
   camback.innerHTML = `<p class='text-mean-mobie' >/ ${newdat.name}</p>`;
 
   if (newdat.chinden === null) {
-    Elment.innerHTML=renderDetail(newdat)
-
+    Elment.innerHTML = renderDetail(newdat);
   } else if (newdat.chinden.length === 0) {
     Elment.innerHTML = `<p >Thư mục này trống</p>`;
     headed.innerHTML = renderHeader2(id, newdat.chinden);
@@ -1560,7 +1573,7 @@ const handlClickMobie2 = (id) => {
   const headed = document.querySelector(".header-hese");
   camback.innerHTML = `<p class='text-mean-mobie' >/ ${newdat.name}</p>`;
   if (newdat.chinden === null) {
-    Elment.innerHTML=renderDetail(newdat)
+    Elment.innerHTML = renderDetail(newdat);
   } else if (newdat.chinden.length === 0) {
     Elment.innerHTML = `<p>Thư mục này trống</p>`;
     headed.innerHTML = renderHeader2(id, newdat.chinden);
@@ -1578,7 +1591,7 @@ const handlOnfileMobie = (event, id) => {
     id: 9000 + RecenMobie.length,
     url: "./img/JPG.svg",
     img: `${URL.createObjectURL(event.target.files[0])}`,
-    share:'',
+    share: "",
     name: fileo().length < 15 ? fileo() : fileo().slice(0, 14) + "...",
     chinden: null,
   };
@@ -1602,7 +1615,7 @@ const handlOnfileMobie = (event, id) => {
   }
 
   casd.innerHTML = renderMobieSmaill(dataFilll);
-  console.log(event)
+  console.log(event);
 };
 
 const hanldCkickAddMobie = (event) => {
@@ -1616,7 +1629,7 @@ const hanldCkickAddMobie = (event) => {
     name: iputvl.value,
     url: "./img/Vector.svg",
     img: "",
-    share:'',
+    share: "",
     chinden: [],
   };
   flatData.push(myobj);
@@ -1634,10 +1647,10 @@ const mobiClickHead = (id) => {
   idding = id;
   const allMobie = document.querySelectorAll(".tree-mobie-small");
   const cardMobie = document.getElementById(`mobie${id}`);
-  const cardshare = document.getElementById(`share-name${id}`)
+  const cardshare = document.getElementById(`share-name${id}`);
   allMobie.forEach((a) => (a.style.backgroundColor = "#FFFFFF"));
   cardMobie.style.backgroundColor = "#f1f3ce";
-  cardshare.classList.toggle('d-none')
+  cardshare.classList.toggle("d-none");
 };
 
 const handlClickHome = () => {
@@ -1648,7 +1661,7 @@ const handlClickHome = () => {
 };
 
 const handDeteMobie = (id) => {
-  const racst = confirm('Bạn thật sự muốn xóa')
+  const racst = confirm("Bạn thật sự muốn xóa");
 
   const redr = document.querySelector(".data-render");
   const delte = arrayMobi.find((a) => a.id === idding);
@@ -1666,9 +1679,7 @@ const handDeteMobie = (id) => {
     const shows = document.getElementById(`text2${id}`);
     shows.classList.toggle("d-none");
   }
-  
-  } 
-
+};
 
 const handlClickLis2 = (id) => {
   const headed = document.querySelector(".header-hese");
@@ -1691,9 +1702,7 @@ const handlSubmitbtn2 = (event, id) => {
   const Elinput = document.querySelector(".input-rename");
   const itemis = dataFilll.map((a) => {
     if (a.id === id) {
-     return { ...a,
-      name :Elinput.value===''?a.name:Elinput.value
-    }
+      return { ...a, name: Elinput.value === "" ? a.name : Elinput.value };
     }
     return a;
   });
@@ -1720,10 +1729,9 @@ const handlSubmitShare = (event, id) => {
   };
   if (newnames.share !== "") {
     ShareData.push(newnames);
-    window.setTimeout(alertMess(EliputShare.value),1500);
+    window.setTimeout(alertMess(EliputShare.value), 1500);
   }
 };
-
 
 const renderDetail = (obj) => {
   return `
@@ -1735,5 +1743,160 @@ const renderDetail = (obj) => {
         <img class='img-crust' src='${obj.img}'/>
     </div>
   </div>
-  `
-}
+  `;
+};
+
+// infor acc
+const Header_user = () => {
+  return `
+  <header class="header row a-center j-between ">
+            <div onclick='handlREN2()' class="item-left item-left-2">
+              <div class="row a-center">
+                <div class="icon-main">
+                  <img class="color-icon" src="./img/DotsNine.svg" alt="9 chấm" />
+                </div>
+                <div class="text-main">
+                  <p class="text-main-text-2">My Dive</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item-right">
+          <button onclick='showNav()'  class="tab-nav">
+          <img class="color-icon lager" src="./img/Table.svg" alt="" />
+         </button>
+         </div>
+          </header>
+  `;
+};
+
+const handlInfor = () => {
+  const navbar = document.querySelector(".nav-left");
+  navbar.classList.toggle("hidenone");
+  const headed = document.querySelector(".header-hese");
+  headed.innerHTML = Header_user();
+  const InforEl = document.querySelector(".re-here");
+  InforEl.innerHTML = renderInforUser(email());
+
+  const elMyfileBg = document.querySelector(".nav-list-focus");
+  const elMyfileimg = document.querySelector(".img-my-file");
+  const elMyfilengme = document.querySelector(".name-user.name-user-myfile");
+  elMyfileBg.style.borderLeft = "2px solid transparent";
+  elMyfileimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elMyfilengme.style.color = "#f1f3ce";
+
+  const elRecosBg = document.querySelector(".recos-color");
+  const elRecosimg = document.querySelector(".img-recos-new");
+  const elRecosngme = document.querySelector(".name-user-recos");
+
+  elRecosBg.style.borderLeft = "2px solid transparent";
+  elRecosimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+  contrast(92%)`;
+  elRecosngme.style.color = "#f1f3ce";
+
+  const elShareBg = document.querySelector(".share-color");
+  const elShareimg = document.querySelector(".img-share");
+  const elSharengme = document.querySelector(".name-user-share");
+
+  elShareBg.style.borderLeft = "2px solid transparent";
+  elShareimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elSharengme.style.color = "#f1f3ce";
+
+  const elTrackBg = document.querySelector(".track-color");
+  const elTrackimg = document.querySelector(".img-track");
+  const elTrackngme = document.querySelector(".name-user-track");
+
+  elTrackBg.style.borderLeft = "2px solid transparent";
+  elTrackimg.style.filter = `invert(99%) sepia(73%) saturate(310%) hue-rotate(3deg) brightness(99%)
+    contrast(92%)`;
+  elTrackngme.style.color = "#f1f3ce";
+
+  const elInforBg = document.querySelector(".bg-infor-color");
+  const elInforimg = document.querySelector(".img-infor-color");
+  const elInforngme = document.querySelector(".name-infor-color");
+  elInforBg.style.borderLeft = "2px solid #1f78d4";
+  elInforimg.style.filter = `invert(39%) sepia(95%) saturate(706%) hue-rotate(179deg)
+  brightness(87%) contrast(101%)`;
+  elInforngme.style.color = "#1f78d4";
+};
+
+const renderInforUser = (user) => {
+  return `
+  <div class='infor-all-items'>
+    <div class='infor-top'>
+      <div class='logo-name-user row a-center j-start'>
+          <p class="logo-login-user">${user.slice(0, 1).toLocaleUpperCase()}</p>
+       </div>
+         <span >Xin chào <strong>${user.slice(0, user.indexOf("@"))}</strong>
+          </span>
+      </div>
+
+    <form class='form-infor-user'>
+        <p class='name-user-space'>Nhận ngay 5 Gb sau khi hoàn thành bảo mật cho tài khoản :</p>
+       <label  for='usernameip'>Tên sử dụng</label>  
+        <br/>
+        <input onchange='choseInput(event)' class='input-infor-user' id='usernameip' type='text' name='usernameip' placeholder='Nick name'/>
+        <p class='message-name'></p>
+        <br/>
+        <label  for='password'>Nhập mật khẩu</label>
+        <br/>
+        <input onchange='choseInput(event)' class='input-infor-user' id='password' type='password' name='password' placeholder='Password'/>
+        <p class='message-password'></p>
+
+        <br/>
+        <label  for='yourphone'>Phone</label>
+        <br/>
+        <input onchange='choseInput(event)' class='input-infor-user' id='yourphone' type='text' name='yourphone' placeholder='Your phone'/>
+        <p class='message-phone'></p>
+
+        <br/>
+        <button onclick='handlSubInfor()' type='button' class='btn-infor-user'>Xác nhận</button>
+    </form>
+
+  </div>`;
+};
+
+const [formValue, formValueSet] = simpleStatuts({
+  usernameip: "",
+  password: "",
+  yourphone: "",
+});
+const choseInput = (event) => {
+  const { name, value } = event.target;
+  formValueSet({
+    ...formValue(),
+    [name]: value,
+  });
+};
+
+const handlSubInfor = () => {
+  const namemessage = document.querySelector(".message-name");
+  const passmessage = document.querySelector(".message-password");
+  const phonemessage = document.querySelector(".message-phone");
+  const InforEl = document.querySelector(".re-here");
+
+  if (formValue().usernameip.length < 3 || formValue().usernameip.length > 20  ) namemessage.innerHTML=`<span class='text-check'>Nhập tên lớn hơn 2 hoặc nhỏ hơn 20 ký tự</span>`; else namemessage.innerHTML=``;
+  if (formValue().password.length < 5 || formValue().usernameip.length > 20  ) passmessage.innerHTML=`<span class='text-check'>Nhập password lớn hơn 5 hoặc nhỏ hơn 20 ký tự</span>`; else passmessage.innerHTML=``;
+  if (formValue().yourphone.length < 6 || formValue().usernameip.length > 14  ) phonemessage.innerHTML=`<span class='text-check'>Số điện thoại không tồn tại</span>`;
+  else phonemessage.innerHTML=``;
+
+  if (!(formValue().usernameip.length < 3 || formValue().usernameip.length > 20  )&&!(formValue().password.length < 5 || formValue().usernameip.length > 20  )&&!(formValue().yourphone.length < 6 || formValue().usernameip.length > 14)) {
+    InforEl.innerHTML = renderSession(formValue());
+  }
+
+
+
+};
+
+const renderSession = (obj) => {
+  return `
+  <div class='show-sasess'>
+    <div>Chúc mừng bạn nhận được thêm 5 Gb upload miễn phí</div>
+    <div>Chúc mừng bạn hoàn tất bảo mật với tên người dùng là <strong>${obj.usernameip}</strong> Mật khẩu là <strong>${obj.password}</strong>
+    </div>
+
+  </div>
+  `;
+};
